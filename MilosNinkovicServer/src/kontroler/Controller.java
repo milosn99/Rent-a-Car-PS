@@ -14,6 +14,7 @@ import niti.Server;
 import operacija.login.PrijaviKorisnikaSO;
 import operacija.mesto.UcitajMestaSO;
 import operacija.musterija.KreirajMusterijuSO;
+import operacija.musterija.NadjiMusterijeSO;
 import operacija.musterija.ObradiMusterijuSO;
 import operacija.musterija.UcitajMusterijeSO;
 
@@ -73,9 +74,15 @@ public class Controller {
         return operacija.getMusterije();
     }
 
-    public void izmeni(Musterija musterija) throws Exception  {
+    public void izmeni(Musterija musterija) throws Exception {
         ObradiMusterijuSO operacija = new ObradiMusterijuSO();
         operacija.izvrsi(musterija, null);
+    }
+
+    public List<Musterija> ucitajMusterije(String uslov) throws Exception {
+        NadjiMusterijeSO operacija = new NadjiMusterijeSO();
+        operacija.izvrsi(new Musterija(), uslov);
+        return operacija.getMusterije();
     }
 
 }

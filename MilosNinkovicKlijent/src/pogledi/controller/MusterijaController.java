@@ -78,6 +78,7 @@ public class MusterijaController {
                     sacuvaj();
                     JOptionPane.showMessageDialog(frmMusterija, "Uspesno ste izmenili musteriju", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     frmMusterija.dispose();
+                    Coordinator.getInstanca().srediFormuPrikazMusterija();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(frmMusterija, "Greska prilikom izmene", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
@@ -102,6 +103,7 @@ public class MusterijaController {
                 musterija.setMesto((Mesto) frmMusterija.getCbMesto().getSelectedItem());
                 musterija.setAdresa(frmMusterija.getTxtAdresa().getText());
                 Komunikacija.getInstanca().izmeni(musterija);
+                Coordinator.getInstanca().dodajParam("Musterija", musterija);
             }
         });
     }

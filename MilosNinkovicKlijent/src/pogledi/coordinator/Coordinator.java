@@ -73,4 +73,8 @@ public class Coordinator {
         musterijaController.otvoriFormu(FormaMod.IZMENI);
     }
 
+    public void srediFormuPrikazMusterija() {
+        pmController.izmenaPodataka();
+    }
+
 }

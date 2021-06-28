@@ -60,4 +60,10 @@ public class MusterijeModelTabele extends AbstractTableModel {
     public Musterija getMusterijaAt(int index) {
         return musterije.get(index);
     }
+
+
+    public void izmeniElement(int i, Musterija musterija) {
+        musterije.set(i, musterija);
+        fireTableRowsUpdated(i, i);
+    }
 }

@@ -77,6 +77,12 @@ public class KlijentNit extends Thread {
                             odgovor.setGreska(null);
                             odgovor.setPodatak(null);
                             break;
+                        case NADJI_MUSTERIJE:
+                            List<Musterija> musterijePoKriterijumu = Controller.getInstanca().ucitajMusterije((String) zahtev.getPodatak());
+                            odgovor.setPodatak(musterijePoKriterijumu);
+                            odgovor.setOperacija(Operacije.UCITAJ_MUSTERIJE);
+                            odgovor.setGreska(null);
+                            break;
                     }
                 } catch (Exception e) {
                     System.out.println("Desila se greska");

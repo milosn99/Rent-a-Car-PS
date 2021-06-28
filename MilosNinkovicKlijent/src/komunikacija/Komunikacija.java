@@ -111,4 +111,17 @@ public class Komunikacija {
         }
     }
 
+    public List<Musterija> vratiMusterijePoUslovu(String uslov) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.NADJI_MUSTERIJE, uslov);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return (List<Musterija>) odgovor.getPodatak();
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
 }

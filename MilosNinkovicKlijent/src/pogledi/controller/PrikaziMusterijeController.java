@@ -44,10 +44,24 @@ public class PrikaziMusterijeController {
         frmPM.addBtnPretraziActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String uslov = "";
-                String ime = frmPM.getTxtIme().getText();
-                String prezime = frmPM.getTxtPrezime().getText();
-                Mesto mesto = (Mesto) frmPM.getCbMesto().getSelectedItem();
+                try {
+                    String uslov = "";
+                    String ime = frmPM.getTxtIme().getText();
+                    String prezime = frmPM.getTxtPrezime().getText();
+                    Mesto mesto = (Mesto) frmPM.getCbMesto().getSelectedItem();
+                    uslov += "musterija.mestoid=" + mesto.getMestoId();
+                    if (!ime.equals("")) {
+                        uslov += " AND musterija.ime= '" + ime+ "'";
+                    }
+                    if (!prezime.equals("")) {
+                        uslov += " AND musterija.prezime= '" + prezime+"'";
+                    }
+                    List<Musterija> musterije = Komunikacija.getInstanca().vratiMusterijePoUslovu(uslov);
+                    MusterijeModelTabele mmt = new MusterijeModelTabele(musterije);
+                    frmPM.getTabelaMusterije().setModel(mmt);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(frmPM, "Greska prilikom pokusaja pretrage", "Greska", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -58,6 +72,7 @@ public class PrikaziMusterijeController {
                 if (red >= 0) {
                     MusterijeModelTabele mmt = (MusterijeModelTabele) frmPM.getTabelaMusterije().getModel();
                     Musterija m = mmt.getMusterijaAt(red);
+                    Coordinator.getInstanca().dodajParam("PozicijaMusterije", mmt.getMusterije().indexOf(m));
                     Coordinator.getInstanca().dodajParam("Musterija", m);
                     Coordinator.getInstanca().otvoriMusterijaIzmeniFormu();
                 }
@@ -78,6 +93,11 @@ public class PrikaziMusterijeController {
         for (Mesto mesto : mesta) {
             frmPM.getCbMesto().addItem(mesto);
         }
+    }
+
+    public void izmenaPodataka() {
+        MusterijeModelTabele mmt = (MusterijeModelTabele) frmPM.getTabelaMusterije().getModel();
+        mmt.izmeniElement((int)Coordinator.getInstanca().getParam("PozicijaMusterije"),(Musterija)Coordinator.getInstanca().getParam("Musterija"));
     }
 
 }

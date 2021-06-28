@@ -27,7 +27,9 @@ public class NadjiMusterijeSO extends ApstraktnaGenerickaOperacija{
         musterije = broker.vratiPoKriterijumu((Musterija)param, " JOIN mesto on (musterija.mestoid=mesto.mestoid)",kljuc);
     }
 
-    public List<Musterija> getMesta() {
+    public List<Musterija> getMusterije() {
         return musterije;
     }
+
+
 }
