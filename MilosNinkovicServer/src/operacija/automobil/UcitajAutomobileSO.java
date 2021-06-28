@@ -25,7 +25,8 @@ public class UcitajAutomobileSO extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
-        automobili = broker.vratiSve(new Automobil(), "JOIN model JOIN marka");
+        automobili = broker.vratiSve(new Automobil(), " JOIN model on (automobil.modelid=model.model.id) "
+                + "JOIN marka on (model.markaid=marka.markaid)");
     }
 
     public List<Automobil> getMesta() {

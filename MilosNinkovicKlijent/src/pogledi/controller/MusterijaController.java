@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
+import pogledi.coordinator.Coordinator;
 import pogledi.forme.FormaMusterija;
 import pogledi.forme.util.FormaMod;
 
@@ -72,7 +73,35 @@ public class MusterijaController {
         frmMusterija.addBtnIzmeniActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    validacija();
+                    sacuvaj();
+                    JOptionPane.showMessageDialog(frmMusterija, "Uspesno ste izmenili musteriju", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                    frmMusterija.dispose();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(frmMusterija, "Greska prilikom izmene", "Greska", JOptionPane.ERROR_MESSAGE);
+                }
+            }
 
+            private void validacija() throws Exception {
+                if (frmMusterija.getTxtAdresa() == null || frmMusterija.getTxtAdresa().equals("")) {
+                    throw new Exception("Nije unesena adresa");
+                }
+                if (frmMusterija.getTxtIme() == null || frmMusterija.getTxtIme().equals("")) {
+                    throw new Exception("Nije uneseno ime");
+                }
+                if (frmMusterija.getTxtPrezime() == null || frmMusterija.getTxtPrezime().equals("")) {
+                    throw new Exception("Nije uneseno prezime");
+                }
+            }
+
+            private void sacuvaj() throws Exception {
+                Musterija musterija = (Musterija) Coordinator.getInstanca().getParam("Musterija");
+                musterija.setIme(frmMusterija.getTxtIme().getText());
+                musterija.setPrezime(frmMusterija.getTxtPrezime().getText());
+                musterija.setMesto((Mesto) frmMusterija.getCbMesto().getSelectedItem());
+                musterija.setAdresa(frmMusterija.getTxtAdresa().getText());
+                Komunikacija.getInstanca().izmeni(musterija);
             }
         });
     }
@@ -98,12 +127,21 @@ public class MusterijaController {
         switch (formaMod) {
             case DODAJ:
                 frmMusterija.getBtnSacuvaj().setEnabled(true);
+                frmMusterija.getBtnSacuvaj().setVisible(true);
                 frmMusterija.getBtnIzmeni().setVisible(false);
                 frmMusterija.getTxtAdresa().setText("");
                 frmMusterija.getTxtIme().setText("");
                 frmMusterija.getTxtPrezime().setText("");
                 break;
             case IZMENI:
+                frmMusterija.getBtnIzmeni().setVisible(true);
+                frmMusterija.getBtnIzmeni().setEnabled(true);
+                frmMusterija.getBtnSacuvaj().setVisible(false);
+                Musterija m = (Musterija) Coordinator.getInstanca().getParam("Musterija");
+                frmMusterija.getTxtIme().setText(m.getIme());
+                frmMusterija.getTxtPrezime().setText(m.getPrezime());
+                frmMusterija.getTxtAdresa().setText(m.getAdresa());
+                frmMusterija.getCbMesto().setSelectedItem(m.getMesto());
                 break;
         }
     }

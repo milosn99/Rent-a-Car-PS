@@ -25,7 +25,7 @@ public class UcitajMusterijuSO extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
-        musterija = (Musterija) broker.vratiPoPrimarnomKljucu((Musterija)param, "JOIN mesto");
+        musterija = (Musterija) broker.vratiPoPrimarnomKljucu((Musterija)param, " JOIN mesto on (musterija.mestoid=mesto.mestoid)");
     }
 
     public Musterija getMusterija() {

@@ -10,6 +10,6 @@ package komunikacija.util;
  * @author milos
  */
 public enum Operacije {
-    LOGIN, UCITAJ_MESTA,ZAPAMTI_MUSTERIJU, UCITAJ_MUSTERIJE,
+    LOGIN, UCITAJ_MESTA,ZAPAMTI_MUSTERIJU, UCITAJ_MUSTERIJE, OBRADI_MUSTERIJU,
 
 }

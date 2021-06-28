@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
+import pogledi.coordinator.Coordinator;
 import pogledi.forme.FormaPrikaziMusterije;
 import pogledi.forme.kompoente.MusterijeModelTabele;
 
@@ -43,28 +44,31 @@ public class PrikaziMusterijeController {
         frmPM.addBtnPretraziActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String uslov = "";
+                String ime = frmPM.getTxtIme().getText();
+                String prezime = frmPM.getTxtPrezime().getText();
+                Mesto mesto = (Mesto) frmPM.getCbMesto().getSelectedItem();
             }
         });
 
         frmPM.addBtnIzmeniActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int red = frmPM.getTabelaMusterije().getSelectedRow();
+                if (red >= 0) {
+                    MusterijeModelTabele mmt = (MusterijeModelTabele) frmPM.getTabelaMusterije().getModel();
+                    Musterija m = mmt.getMusterijaAt(red);
+                    Coordinator.getInstanca().dodajParam("Musterija", m);
+                    Coordinator.getInstanca().otvoriMusterijaIzmeniFormu();
+                }
             }
         });
     }
 
     private void pripremiFormu() throws Exception {
-        frmPM.getBtnIzmeni().setVisible(true);
-        frmPM.getBtnPretrazi().setVisible(true);
-        frmPM.getCbMesto().setVisible(true);
-        frmPM.getTxtIme().setVisible(true);
-        frmPM.getTxtPrezime().setVisible(true);
         List<Musterija> musterije = Komunikacija.getInstanca().ucitajMusterije();
         MusterijeModelTabele mmt = new MusterijeModelTabele(musterije);
         frmPM.getTabelaMusterije().setModel(mmt);
-        frmPM.getTabelaMusterije().setVisible(true);
         popuniCbMesto();
     }
 

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package operacija.automobil;
+package operacija.musterija;
 
-import domen.Automobil;
+import domen.Musterija;
 import java.util.List;
 import operacija.ApstraktnaGenerickaOperacija;
 
@@ -13,9 +13,9 @@ import operacija.ApstraktnaGenerickaOperacija;
  *
  * @author milos
  */
-public class NadjiAutomobile extends ApstraktnaGenerickaOperacija {
+public class NadjiMusterijeSO extends ApstraktnaGenerickaOperacija{
 
-    List<Automobil> automobili;
+    List<Musterija> musterije;
 
     @Override
     protected void preduslovi(Object param) throws Exception {
@@ -24,10 +24,10 @@ public class NadjiAutomobile extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
-        automobili = broker.vratiPoKriterijumu((Automobil)param, "JOIN model JOIN marka",kljuc);
+        musterije = broker.vratiPoKriterijumu((Musterija)param, " JOIN mesto on (musterija.mestoid=mesto.mestoid)",kljuc);
     }
 
-    public List<Automobil> getMesta() {
-        return automobili;
+    public List<Musterija> getMesta() {
+        return musterije;
     }
 }

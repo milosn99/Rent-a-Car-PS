@@ -13,7 +13,7 @@ import operacija.ApstraktnaGenerickaOperacija;
  *
  * @author milos
  */
-public class NadjiRezervacije extends ApstraktnaGenerickaOperacija {
+public class NadjiRezervacijeSO extends ApstraktnaGenerickaOperacija {
 
     List<Rezervacija> rezervacije;
 
@@ -24,7 +24,11 @@ public class NadjiRezervacije extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
-        rezervacije = broker.vratiPoKriterijumu((Rezervacija)param, "JOIN musterija JOIN mesto JOIN automobil JOIN model JOIN marka", kljuc);
+        rezervacije = broker.vratiPoKriterijumu((Rezervacija)param, " JOIN musterija on (rezervacija.musterijaid=musterija.musterijaid) "
+                + "JOIN mesto on (musterija.mestoid=mesto.mestoid) "
+                + "JOIN automobil on (rezervacija.automobilid=automobil.automobilid)s "
+                + "JOIN model on (automobil.modelid=model.model.id) "
+                + "JOIN marka on (model.markaid=marka.markaid)", kljuc);
     }
 
     public List<Rezervacija> getMesta() {

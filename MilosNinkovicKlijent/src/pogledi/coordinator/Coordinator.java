@@ -30,7 +30,7 @@ public class Coordinator {
     private PrikaziMusterijeController pmController;
 
     private Coordinator() {
-        params= new HashMap<>();
+        params = new HashMap<>();
     }
 
     public static Coordinator getInstanca() {
@@ -39,12 +39,12 @@ public class Coordinator {
         }
         return instanca;
     }
-    
-    public void dodajParam(String s, Object o){
+
+    public void dodajParam(String s, Object o) {
         params.put(s, o);
     }
-    
-    public Object getParam(String s){
+
+    public Object getParam(String s) {
         return params.get(s);
     }
 
@@ -67,5 +67,10 @@ public class Coordinator {
         pmController = new PrikaziMusterijeController(new FormaPrikaziMusterije(glavniController.getFrmGlavna(), true));
         pmController.otvoriFormu();
     }
-    
+
+    public void otvoriMusterijaIzmeniFormu() {
+        musterijaController = new MusterijaController(new FormaMusterija(glavniController.getFrmGlavna(), true));
+        musterijaController.otvoriFormu(FormaMod.IZMENI);
+    }
+
 }

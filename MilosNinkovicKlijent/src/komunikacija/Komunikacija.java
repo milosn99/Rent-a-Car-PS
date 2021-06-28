@@ -98,4 +98,17 @@ public class Komunikacija {
         }
     }
 
+    public void izmeni(Musterija musterija) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.OBRADI_MUSTERIJU, musterija);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return;
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
 }

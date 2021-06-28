@@ -25,7 +25,7 @@ public class UcitajModeleSO extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
-        modeli = broker.vratiSve(new Model(), "JOIN marka");
+        modeli = broker.vratiSve(new Model(), " JOIN marka on (model.markaid=marka.markaid)");
     }
 
     public List<Model> getMesta() {

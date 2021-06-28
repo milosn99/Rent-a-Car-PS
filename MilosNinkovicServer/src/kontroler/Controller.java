@@ -14,6 +14,7 @@ import niti.Server;
 import operacija.login.PrijaviKorisnikaSO;
 import operacija.mesto.UcitajMestaSO;
 import operacija.musterija.KreirajMusterijuSO;
+import operacija.musterija.ObradiMusterijuSO;
 import operacija.musterija.UcitajMusterijeSO;
 
 /**
@@ -40,7 +41,6 @@ public class Controller {
         Korisnik korisnik = new Korisnik(korisnickoIme, sifra);
 
         operacija.izvrsi(korisnik, null);
-//        System.out.println("IZVRSI u LOGINu ");
 
         korisnik = operacija.getKorisnik();
         return korisnik;
@@ -71,6 +71,11 @@ public class Controller {
         UcitajMusterijeSO operacija = new UcitajMusterijeSO();
         operacija.izvrsi(null, null);
         return operacija.getMusterije();
+    }
+
+    public void izmeni(Musterija musterija) throws Exception  {
+        ObradiMusterijuSO operacija = new ObradiMusterijuSO();
+        operacija.izvrsi(musterija, null);
     }
 
 }
