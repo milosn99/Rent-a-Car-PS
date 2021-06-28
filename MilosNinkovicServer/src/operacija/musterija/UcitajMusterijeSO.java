@@ -24,10 +24,11 @@ public class UcitajMusterijeSO extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
-        musterije = broker.vratiSve(new Musterija(), "JOIN mesto");
+        musterije = broker.vratiSve(new Musterija(), " JOIN mesto on (musterija.mestoid=mesto.mestoid)");
     }
 
-    public List<Musterija> getMesta() {
+    public List<Musterija> getMusterije() {
         return musterije;
     }
+
 }

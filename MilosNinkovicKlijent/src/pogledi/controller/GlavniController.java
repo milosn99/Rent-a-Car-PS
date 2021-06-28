@@ -32,6 +32,13 @@ public class GlavniController {
             }
             
         });
+        
+        frmGlavna.addMiMusterijaPrikaziActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Coordinator.getInstanca().otvoriPrikaziMusterijeFormu();
+            }
+        });
     }
 
     public void otvoriFormu() {

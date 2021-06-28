@@ -91,7 +91,7 @@ public class Musterija implements ApstraktniDomenskiObjekat {
             String prezime = rs.getString("musterija.prezime");
             String adresa = rs.getString("musterija.adresa");
             Musterija musterija = new Musterija(musterijaId, ime, prezime, adresa, mesto);
-            lista.add(mesto);
+            lista.add(musterija);
         }
         return lista;
     }

@@ -84,4 +84,18 @@ public class Komunikacija {
             throw odgovor.getGreska();
         }
     }
+
+    public List<Musterija> ucitajMusterije() throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_MUSTERIJE, null);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return (List<Musterija>) odgovor.getPodatak();
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
 }

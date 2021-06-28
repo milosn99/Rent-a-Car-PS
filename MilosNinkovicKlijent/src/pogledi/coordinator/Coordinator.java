@@ -10,9 +10,11 @@ import java.util.Map;
 import pogledi.controller.GlavniController;
 import pogledi.controller.LogInController;
 import pogledi.controller.MusterijaController;
+import pogledi.controller.PrikaziMusterijeController;
 import pogledi.forme.FormaGlavna;
 import pogledi.forme.FormaLogIn;
 import pogledi.forme.FormaMusterija;
+import pogledi.forme.FormaPrikaziMusterije;
 import pogledi.forme.util.FormaMod;
 
 /**
@@ -25,6 +27,7 @@ public class Coordinator {
     private Map<String, Object> params;
     private GlavniController glavniController;
     private MusterijaController musterijaController;
+    private PrikaziMusterijeController pmController;
 
     private Coordinator() {
         params= new HashMap<>();
@@ -58,6 +61,11 @@ public class Coordinator {
     public void otvoriMusterijaUbaciFormu() {
         musterijaController = new MusterijaController(new FormaMusterija(glavniController.getFrmGlavna(), true));
         musterijaController.otvoriFormu(FormaMod.DODAJ);
+    }
+
+    public void otvoriPrikaziMusterijeFormu() {
+        pmController = new PrikaziMusterijeController(new FormaPrikaziMusterije(glavniController.getFrmGlavna(), true));
+        pmController.otvoriFormu();
     }
     
 }

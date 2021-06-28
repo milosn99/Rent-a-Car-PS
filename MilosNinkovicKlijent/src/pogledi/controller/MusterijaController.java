@@ -104,7 +104,7 @@ public class MusterijaController {
                 frmMusterija.getTxtPrezime().setText("");
                 break;
             case IZMENI:
-
+                break;
         }
     }
 }

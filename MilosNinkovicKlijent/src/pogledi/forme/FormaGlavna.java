@@ -20,7 +20,7 @@ public class FormaGlavna extends javax.swing.JFrame {
     public FormaGlavna() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+
     }
 
     /**
@@ -41,6 +41,7 @@ public class FormaGlavna extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         menuMusterija = new javax.swing.JMenu();
         miMusterijaUbaci = new javax.swing.JMenuItem();
+        miMusterijaPrikazi = new javax.swing.JMenuItem();
         menuAutomobil = new javax.swing.JMenu();
         menuRezervacija = new javax.swing.JMenu();
 
@@ -63,6 +64,9 @@ public class FormaGlavna extends javax.swing.JFrame {
 
         miMusterijaUbaci.setText("Dodaj");
         menuMusterija.add(miMusterijaUbaci);
+
+        miMusterijaPrikazi.setText("Prikazi");
+        menuMusterija.add(miMusterijaPrikazi);
 
         jMenuBar2.add(menuMusterija);
 
@@ -106,6 +110,7 @@ public class FormaGlavna extends javax.swing.JFrame {
     private javax.swing.JMenu menuAutomobil;
     private javax.swing.JMenu menuMusterija;
     private javax.swing.JMenu menuRezervacija;
+    private javax.swing.JMenuItem miMusterijaPrikazi;
     private javax.swing.JMenuItem miMusterijaUbaci;
     // End of variables declaration//GEN-END:variables
 
@@ -124,9 +129,12 @@ public class FormaGlavna extends javax.swing.JFrame {
     public javax.swing.JMenu getMenuRezervacija() {
         return menuRezervacija;
     }
-    
-    public void addMiMusterijaUbaciActionListener(ActionListener actionListener){
+
+    public void addMiMusterijaUbaciActionListener(ActionListener actionListener) {
         miMusterijaUbaci.addActionListener(actionListener);
     }
-    
+
+    public void addMiMusterijaPrikaziActionListener(ActionListener actionListener) {
+        miMusterijaPrikazi.addActionListener(actionListener);
+    }
 }

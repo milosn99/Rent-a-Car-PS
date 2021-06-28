@@ -6,6 +6,7 @@
 package operacija.mesto;
 
 import domen.Mesto;
+import domen.Musterija;
 import java.util.List;
 import operacija.ApstraktnaGenerickaOperacija;
 
@@ -30,5 +31,6 @@ public class UcitajMestaSO extends ApstraktnaGenerickaOperacija{
     public List<Mesto> getMesta() {
         return mesta;
     }
+
     
 }

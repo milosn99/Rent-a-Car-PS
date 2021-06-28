@@ -50,6 +50,11 @@
                 <Property name="text" type="java.lang.String" value="Dodaj"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miMusterijaPrikazi">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Prikazi"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuAutomobil">
