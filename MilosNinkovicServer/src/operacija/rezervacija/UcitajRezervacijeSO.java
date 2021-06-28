@@ -26,7 +26,7 @@ public class UcitajRezervacijeSO extends ApstraktnaGenerickaOperacija{
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
         rezervacije = broker.vratiSve(new Rezervacija(), " JOIN musterija on (rezervacija.musterijaid=musterija.musterijaid) "
                 + "JOIN mesto on (musterija.mestoid=mesto.mestoid) "
-                + "JOIN automobil on (rezervacija.automobilid=automobil.automobilid)s "
+                + "JOIN automobil on (rezervacija.registracija=automobil.registracija) "
                 + "JOIN model on (automobil.modelid=model.model.id) "
                 + "JOIN marka on (model.markaid=marka.markaid)");
     }

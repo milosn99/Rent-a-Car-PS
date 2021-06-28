@@ -74,7 +74,7 @@ public class Rezervacija implements ApstraktniDomenskiObjekat {
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
         List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
         while (rs.next()) {
-            Long automobilid = rs.getLong("rezervacija.automobilid");
+            String registracija = rs.getString("rezervacija.registracija");
             Long modelid = rs.getLong("automobil.modelid");
 
             Long markaid = rs.getLong("model.markaid");
@@ -82,16 +82,19 @@ public class Rezervacija implements ApstraktniDomenskiObjekat {
             Marka marka = new Marka(markaid, markaNaziv);
 
             String oznaka = rs.getString("model.oznaka");
-            int kubikaza = rs.getInt("model.kubikaza");
-            BigDecimal jacinaMotora = rs.getBigDecimal("model.jacinamotora");
-            Model model = new Model(modelid, oznaka, kubikaza, jacinaMotora, marka);
+            String segment = rs.getString("model.segment");
 
+            Model model = new Model(modelid, oznaka, segment, marka);
+
+            int kubikaza = rs.getInt("automobil.kubikaza");
+            int jacinaMotora = rs.getInt("automobil.jacinamotora");
             int godiste = rs.getInt("automobil.godiste");
+            String gorivo = rs.getString("automobil.gorivo");
             int kilometraza = rs.getInt("automobil.kilometraza");
             BigDecimal potrosnja = rs.getBigDecimal("automobil.potrosnja");
             int cena = rs.getInt("automobil.cena");
 
-            Automobil automobil = new Automobil(automobilid, godiste, cena, kilometraza, potrosnja, model);
+            Automobil automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model);
 
             Long mestoid = rs.getLong("musterija.mestoid");
             String naziv = rs.getString("mesto.naziv");
@@ -115,24 +118,24 @@ public class Rezervacija implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        return "automobilid,musterijaid,datumod,datumdo";
+        return "registracija,musterijaid,datumod,datumdo";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        return "" + automobil.getAutomobilId() + "," + musterija.getMusterijaId() + ",'" + new java.sql.Date(datumOd.getTime()) + "','" + new java.sql.Date(datumDo.getTime()) + "'";
+        return "'" + automobil.getRegistracija() + "'," + musterija.getMusterijaId() + ",'" + new java.sql.Date(datumOd.getTime()) + "','" + new java.sql.Date(datumDo.getTime()) + "'";
     }
 
     @Override
     public String vratiPrimarniKljuc() {
-        return "rezervacija.datumod= '" + new java.sql.Date(datumOd.getTime()) + "' and rezervacija.automobilid=" + automobil.getAutomobilId();
+        return "rezervacija.datumod= '" + new java.sql.Date(datumOd.getTime()) + "' and rezervacija.registracija=" + automobil.getRegistracija();
     }
 
     @Override
     public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
         ApstraktniDomenskiObjekat rezervacija = null;
         while (rs.next()) {
-            Long automobilid = rs.getLong("rezervacija.automobilid");
+            String registracija = rs.getString("rezervacija.registracija");
             Long modelid = rs.getLong("automobil.modelid");
 
             Long markaid = rs.getLong("model.markaid");
@@ -140,16 +143,19 @@ public class Rezervacija implements ApstraktniDomenskiObjekat {
             Marka marka = new Marka(markaid, markaNaziv);
 
             String oznaka = rs.getString("model.oznaka");
-            int kubikaza = rs.getInt("model.kubikaza");
-            BigDecimal jacinaMotora = rs.getBigDecimal("model.jacinamotora");
-            Model model = new Model(modelid, oznaka, kubikaza, jacinaMotora, marka);
+            String segment = rs.getString("model.segment");
 
+            Model model = new Model(modelid, oznaka, segment, marka);
+
+            int kubikaza = rs.getInt("automobil.kubikaza");
+            int jacinaMotora = rs.getInt("automobil.jacinamotora");
             int godiste = rs.getInt("automobil.godiste");
+            String gorivo = rs.getString("automobil.gorivo");
             int kilometraza = rs.getInt("automobil.kilometraza");
             BigDecimal potrosnja = rs.getBigDecimal("automobil.potrosnja");
             int cena = rs.getInt("automobil.cena");
 
-            Automobil automobil = new Automobil(automobilid, godiste, cena, kilometraza, potrosnja, model);
+            Automobil automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model);
 
             Long mestoid = rs.getLong("musterija.mestoid");
             String naziv = rs.getString("mesto.naziv");

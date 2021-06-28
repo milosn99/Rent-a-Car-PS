@@ -14,23 +14,26 @@ import operacija.ApstraktnaGenerickaOperacija;
  *
  * @author milos
  */
-public class KreirajAutomobilSO extends ApstraktnaGenerickaOperacija{
+public class KreirajAutomobilSO extends ApstraktnaGenerickaOperacija {
     
     @Override
     protected void preduslovi(Object param) throws Exception {
         if (param == null || !(param instanceof Automobil)) {
             throw new Exception("Sistem nije dobio musteriju");
         }
-
+        
         Automobil a = (Automobil) param;
-        if(a.getCena()<0 || a.getGodiste()<0 || a.getKilometraza()<0 || a.getModel()==null){
+        if (a.getCena() < 0 || a.getGodiste() < 0 || 
+                a.getKilometraza() < 0 || a.getModel() == null || a.getGorivo() == null || 
+                a.getGorivo().equals("") || a.getRegistracija() == null || 
+                a.getRegistracija().equals("") || a.getJacinaMotora()<0 || a.getKubikaza()<0) {
             throw new Exception("Lose uneseni podaci");
         };
     }
-
+    
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
         broker.ubaci((Automobil) param);
     }
-
+    
 }

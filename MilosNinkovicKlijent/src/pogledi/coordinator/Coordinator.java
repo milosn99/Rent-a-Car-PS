@@ -24,13 +24,13 @@ import pogledi.forme.util.FormaMod;
 public class Coordinator {
 
     public static Coordinator instanca;
-    private Map<String, Object> params;
+    private Map<String, Object> parametri;
     private GlavniController glavniController;
     private MusterijaController musterijaController;
     private PrikaziMusterijeController pmController;
 
     private Coordinator() {
-        params = new HashMap<>();
+        parametri = new HashMap<>();
     }
 
     public static Coordinator getInstanca() {
@@ -41,11 +41,11 @@ public class Coordinator {
     }
 
     public void dodajParam(String s, Object o) {
-        params.put(s, o);
+        parametri.put(s, o);
     }
 
-    public Object getParam(String s) {
-        return params.get(s);
+    public Object vratiParam(String s) {
+        return parametri.get(s);
     }
 
     public void otvoriLoginFormu() {

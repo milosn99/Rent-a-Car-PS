@@ -97,7 +97,7 @@ public class MusterijaController {
             }
 
             private void sacuvaj() throws Exception {
-                Musterija musterija = (Musterija) Coordinator.getInstanca().getParam("Musterija");
+                Musterija musterija = (Musterija) Coordinator.getInstanca().vratiParam("Musterija");
                 musterija.setIme(frmMusterija.getTxtIme().getText());
                 musterija.setPrezime(frmMusterija.getTxtPrezime().getText());
                 musterija.setMesto((Mesto) frmMusterija.getCbMesto().getSelectedItem());
@@ -139,7 +139,7 @@ public class MusterijaController {
                 frmMusterija.getBtnIzmeni().setVisible(true);
                 frmMusterija.getBtnIzmeni().setEnabled(true);
                 frmMusterija.getBtnSacuvaj().setVisible(false);
-                Musterija m = (Musterija) Coordinator.getInstanca().getParam("Musterija");
+                Musterija m = (Musterija) Coordinator.getInstanca().vratiParam("Musterija");
                 frmMusterija.getTxtIme().setText(m.getIme());
                 frmMusterija.getTxtPrezime().setText(m.getPrezime());
                 frmMusterija.getTxtAdresa().setText(m.getAdresa());

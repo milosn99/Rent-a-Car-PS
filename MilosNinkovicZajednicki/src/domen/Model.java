@@ -19,27 +19,79 @@ public class Model implements ApstraktniDomenskiObjekat {
 
     private Long modelId;
     private String oznaka;
-    private int kubikaza;
-    private BigDecimal jacinaMotora;
+    private String segment;
     private Marka marka;
 
     public Model() {
     }
 
-    public Model(Long modelId, String oznaka, int kubikaza, BigDecimal jacinaMotora, Marka marka) {
+    public Model(Long modelId, String oznaka, String segment, Marka marka) {
         this.modelId = modelId;
         this.oznaka = oznaka;
-        this.kubikaza = kubikaza;
-        this.jacinaMotora = jacinaMotora;
+        this.segment = segment;
         this.marka = marka;
     }
 
-    public Marka getMarka() {
-        return marka;
+
+
+    @Override
+    public String vratiNazivTabele() {
+        return "model";
     }
 
-    public void setMarka(Marka marka) {
-        this.marka = marka;
+    @Override
+    public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
+        List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+        while (rs.next()) {
+            Long modelid = rs.getLong("model.modelid");
+
+            Long markaid = rs.getLong("model.markaid");
+            String markaNaziv = rs.getString("marka.naziv");
+            Marka marka = new Marka(markaid, markaNaziv);
+
+            String oznaka = rs.getString("model.oznaka");
+            String segment = rs.getString("model.segment");
+            Model model = new Model(modelid, oznaka, segment, marka);
+            lista.add(model);
+        }
+        return lista;
+    }
+
+    @Override
+    public String vratiKoloneZaUbacivanje() {
+        return "markaid,oznaka,segment";
+    }
+
+    @Override
+    public String vratiVrednostiZaUbacivanje() {
+        return "" + marka.getMarkaId() + ",'" + oznaka + "','" + segment + "'";
+    }
+
+    @Override
+    public String vratiPrimarniKljuc() {
+        return "model.modelid = " + modelId + "AND model.markaid = " + marka.getMarkaId();
+    }
+
+    @Override
+    public String vratiVrednostiZaIzmenu() {
+        return "markaid=" + marka.getMarkaId() + ",oznaka='" + oznaka + "',segment='" + segment + "'";
+    }
+
+    @Override
+    public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
+        ApstraktniDomenskiObjekat model = null;
+        while (rs.next()) {
+            Long modelid = rs.getLong("model.modelid");
+
+            Long markaid = rs.getLong("model.markaid");
+            String markaNaziv = rs.getString("marka.naziv");
+            Marka marka = new Marka(markaid, markaNaziv);
+
+            String oznaka = rs.getString("model.oznaka");
+            String segment = rs.getString("model.segment");
+            model = new Model(modelid, oznaka, segment, marka);
+        }
+        return model;
     }
 
     public Long getModelId() {
@@ -58,82 +110,20 @@ public class Model implements ApstraktniDomenskiObjekat {
         this.oznaka = oznaka;
     }
 
-    public int getKubikaza() {
-        return kubikaza;
+    public String getSegment() {
+        return segment;
     }
 
-    public void setKubikaza(int kubikaza) {
-        this.kubikaza = kubikaza;
+    public void setSegment(String segment) {
+        this.segment = segment;
     }
 
-    public BigDecimal getJacinaMotora() {
-        return jacinaMotora;
+    public Marka getMarka() {
+        return marka;
     }
 
-    public void setJacinaMotora(BigDecimal jacinaMotora) {
-        this.jacinaMotora = jacinaMotora;
-    }
-
-    @Override
-    public String vratiNazivTabele() {
-        return "model";
-    }
-
-    @Override
-    public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
-        while (rs.next()) {
-            Long modelid = rs.getLong("model.modelid");
-
-            Long markaid = rs.getLong("model.markaid");
-            String markaNaziv = rs.getString("marka.naziv");
-            Marka marka = new Marka(markaid, markaNaziv);
-
-            String oznaka = rs.getString("model.oznaka");
-            int kubikaza = rs.getInt("model.kubikaza");
-            BigDecimal jacinaMotora = rs.getBigDecimal("model.jacinamotora");
-            Model model = new Model(modelid, oznaka, kubikaza, jacinaMotora, marka);
-            lista.add(model);
-        }
-        return lista;
-    }
-
-    @Override
-    public String vratiKoloneZaUbacivanje() {
-        return "markaid,oznaka,kubikaza,jacinaMotora";
-    }
-
-    @Override
-    public String vratiVrednostiZaUbacivanje() {
-        return "" + marka.getMarkaId() + ",'" + oznaka + "'," + kubikaza + "," + jacinaMotora;
-    }
-
-    @Override
-    public String vratiPrimarniKljuc() {
-        return "model.modelid = " + modelId + "AND model.markaid = " + marka.getMarkaId();
-    }
-
-    @Override
-    public String vratiVrednostiZaIzmenu() {
-        return "markaid=" + marka.getMarkaId() + ",oznaka='" + oznaka + "',kubikaza=" + kubikaza + ",jacinaMotora=" + jacinaMotora;
-    }
-
-    @Override
-    public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
-        ApstraktniDomenskiObjekat model = null;
-        while (rs.next()) {
-            Long modelid = rs.getLong("model.modelid");
-
-            Long markaid = rs.getLong("model.markaid");
-            String markaNaziv = rs.getString("marka.naziv");
-            Marka marka = new Marka(markaid, markaNaziv);
-
-            String oznaka = rs.getString("model.oznaka");
-            int kubikaza = rs.getInt("model.kubikaza");
-            BigDecimal jacinaMotora = rs.getBigDecimal("model.jacinamotora");
-            model = new Model(modelid, oznaka, kubikaza, jacinaMotora, marka);
-        }
-        return model;
+    public void setMarka(Marka marka) {
+        this.marka = marka;
     }
 
 }

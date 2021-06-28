@@ -14,23 +14,23 @@ import operacija.ApstraktnaGenerickaOperacija;
  * @author milos
  */
 public class KreirajModelSO extends ApstraktnaGenerickaOperacija {
-
+    
     @Override
     protected void preduslovi(Object param) throws Exception {
         if (param == null || !(param instanceof Model)) {
             throw new Exception("Sistem nije dobio model");
         }
-
+        
         Model m = (Model) param;
-
-        if(m.getKubikaza()<0 || m.getMarka()==null || m.getOznaka()==null || m.getOznaka().equals("")){
+        
+        if (m.getSegment() == null || m.getSegment().equals("") || m.getMarka() == null || m.getOznaka() == null || m.getOznaka().equals("")) {
             throw new Exception("Losi podaci");
         };
     }
-
+    
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
         broker.ubaci((Model) param);
     }
-
+    
 }

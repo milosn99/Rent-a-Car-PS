@@ -31,8 +31,8 @@ public abstract class ApstraktnaGenerickaOperacija {
         } catch (Exception e) {
             ponistiTransakciju();
             throw e;
-        } finally{
-            ugasi();
+        } finally {
+            ugasiKonekciju();
         }
     }
 
@@ -41,19 +41,19 @@ public abstract class ApstraktnaGenerickaOperacija {
     protected abstract void izvrsiOperaciju(Object param, String kljuc) throws Exception;
 
     private void zapocniTransakciju() throws Exception {
-        ((DBRepozitorijum)broker).povezi();
+        ((DBRepozitorijum) broker).povezi();
     }
 
     private void potvrdiTransakciju() throws Exception {
-        ((DBRepozitorijum)broker).potvrdiTransakciju();
+        ((DBRepozitorijum) broker).potvrdiTransakciju();
     }
 
     private void ponistiTransakciju() throws Exception {
-        ((DBRepozitorijum)broker).ponistiTransakciju();
+        ((DBRepozitorijum) broker).ponistiTransakciju();
     }
 
-    private void ugasi() throws Exception {
-        ((DBRepozitorijum)broker).ugasi();
+    private void ugasiKonekciju() throws Exception {
+        ((DBRepozitorijum) broker).ugasiKonekciju();
     }
 
 }

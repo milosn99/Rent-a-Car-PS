@@ -51,10 +51,10 @@ public class PrikaziMusterijeController {
                     Mesto mesto = (Mesto) frmPM.getCbMesto().getSelectedItem();
                     uslov += "musterija.mestoid=" + mesto.getMestoId();
                     if (!ime.equals("")) {
-                        uslov += " AND musterija.ime= '" + ime+ "'";
+                        uslov += " AND musterija.ime= '" + ime + "'";
                     }
                     if (!prezime.equals("")) {
-                        uslov += " AND musterija.prezime= '" + prezime+"'";
+                        uslov += " AND musterija.prezime= '" + prezime + "'";
                     }
                     List<Musterija> musterije = Komunikacija.getInstanca().vratiMusterijePoUslovu(uslov);
                     MusterijeModelTabele mmt = new MusterijeModelTabele(musterije);
@@ -97,7 +97,7 @@ public class PrikaziMusterijeController {
 
     public void izmenaPodataka() {
         MusterijeModelTabele mmt = (MusterijeModelTabele) frmPM.getTabelaMusterije().getModel();
-        mmt.izmeniElement((int)Coordinator.getInstanca().getParam("PozicijaMusterije"),(Musterija)Coordinator.getInstanca().getParam("Musterija"));
+        mmt.izmeniElement((int) Coordinator.getInstanca().vratiParam("PozicijaMusterije"), (Musterija) Coordinator.getInstanca().vratiParam("Musterija"));
     }
 
 }

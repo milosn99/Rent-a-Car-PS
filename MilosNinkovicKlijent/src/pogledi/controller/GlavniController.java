@@ -47,7 +47,7 @@ public class GlavniController {
     }
 
     private void pripremiFormu() {
-        Korisnik korisnik = (Korisnik) Coordinator.getInstanca().getParam("korisnik");
+        Korisnik korisnik = (Korisnik) Coordinator.getInstanca().vratiParam("korisnik");
         frmGlavna.getLblDobrodosli().setText(frmGlavna.getLblDobrodosli().getText() + " " + korisnik.getKorisnickoIme());
     }
 

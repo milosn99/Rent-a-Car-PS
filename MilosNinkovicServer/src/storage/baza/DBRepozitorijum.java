@@ -19,7 +19,7 @@ public interface DBRepozitorijum<T> extends Repozitorijum<T> {
 
     }
 
-    default void ugasi() throws Exception {
+    default void ugasiKonekciju() throws Exception {
         Konekcija.getInstanca().getKonekcija().close();
 
     }
