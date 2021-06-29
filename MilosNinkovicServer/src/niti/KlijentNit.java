@@ -122,6 +122,12 @@ public class KlijentNit extends Thread {
                             odgovor.setOperacija(Operacije.UCITAJ_MARKE);
                             odgovor.setGreska(null);
                             break;
+                        case OBRADI_AUTOMOBIL:
+                            Controller.getInstanca().izmeni((Automobil) zahtev.getPodatak());
+                            odgovor.setOperacija(Operacije.OBRADI_AUTOMOBIL);
+                            odgovor.setGreska(null);
+                            odgovor.setPodatak(null);
+                            break;
                     }
                 } catch (Exception e) {
                     System.out.println("Desila se greska");

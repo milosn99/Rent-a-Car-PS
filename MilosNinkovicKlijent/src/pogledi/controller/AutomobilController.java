@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
+import pogledi.coordinator.Coordinator;
 import pogledi.forme.FormaAutomobil;
 import pogledi.forme.util.FormaMod;
 
@@ -165,15 +166,7 @@ public class AutomobilController {
             }
 
             private void izmeni() throws Exception {
-                Model model;
-                if (frmAutomobil.getRadioNovi().isSelected()) {
-                    Marka marka = (Marka) frmAutomobil.getCbMarka().getSelectedItem();
-                    String oznaka = frmAutomobil.getTxtOznaka().getText();
-                    String segment = (String) frmAutomobil.getCbSegment().getSelectedItem();
-                    model = new Model(Long.MIN_VALUE, oznaka, segment, marka);
-                } else {
-                    model = (Model) frmAutomobil.getCbModel().getSelectedItem();
-                }
+                Model model = (Model) frmAutomobil.getCbModel().getSelectedItem();
                 String registracija = frmAutomobil.getTxtRegistracija().getText().trim();
                 int godiste = Integer.parseInt(frmAutomobil.getTxtGodiste().getText().trim());
                 int kilometraza = Integer.parseInt(frmAutomobil.getTxtKilometraza().getText().trim());
@@ -184,12 +177,8 @@ public class AutomobilController {
                 int jacinaMotora = Integer.parseInt(frmAutomobil.getTxtJacinaMotora().getText().trim());
 
                 Automobil automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model);
-                if (frmAutomobil.getRadioNovi().isSelected()) {
-                    Komunikacija.getInstanca().ubaciAutomobilNovi(automobil);
-                } else {
-                    Komunikacija.getInstanca().ubaciAutomobilPostojeci(automobil);
-                }
 
+                Komunikacija.getInstanca().izmeni(automobil);
             }
         });
     }
@@ -251,6 +240,18 @@ public class AutomobilController {
                 frmAutomobil.getTxtKubikaza().setEnabled(false);
                 frmAutomobil.getTxtJacinaMotora().setEnabled(false);
                 frmAutomobil.getCbGorivo().setEnabled(false);
+
+                Automobil automobil = (Automobil) Coordinator.getInstanca().vratiParam("Automobil");
+
+                frmAutomobil.getTxtRegistracija().setText(automobil.getRegistracija());
+                frmAutomobil.getTxtGodiste().setText("" + automobil.getGodiste());
+                frmAutomobil.getTxtKilometraza().setText("" + automobil.getKilometraza());
+                frmAutomobil.getTxtCena().setText("" + automobil.getCena());
+                frmAutomobil.getTxtPotrosnja().setText("" + automobil.getPotrosnja());
+                frmAutomobil.getTxtKubikaza().setText("" + automobil.getKubikaza());
+                frmAutomobil.getTxtJacinaMotora().setText("" + automobil.getJacinaMotora());
+                frmAutomobil.getCbModel().setSelectedItem(automobil.getModel());
+                frmAutomobil.getCbGorivo().setSelectedItem(automobil.getGorivo());
                 break;
         }
     }

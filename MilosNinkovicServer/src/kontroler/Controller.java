@@ -17,6 +17,7 @@ import niti.Server;
 import operacija.automobil.KreirajAutomobilNoviSO;
 import operacija.automobil.KreirajAutomobilSO;
 import operacija.automobil.NadjiAutomobileSO;
+import operacija.automobil.ObradiAutomobilSO;
 import operacija.automobil.UcitajAutomobileSO;
 import operacija.login.PrijaviKorisnikaSO;
 import operacija.marka.UcitajMarkeSO;
@@ -129,4 +130,8 @@ public class Controller {
         return operacija.getAutomobili();
     }
 
+    public void izmeni(Automobil automobil) throws Exception {
+        ObradiAutomobilSO operacija = new ObradiAutomobilSO();
+        operacija.izvrsi(automobil, null);
+    }
 }

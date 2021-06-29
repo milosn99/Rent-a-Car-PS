@@ -99,7 +99,7 @@ public class PrikaziAutomobileController {
                     Automobil a = amt.getAutomobilAt(red);
                     Coordinator.getInstanca().dodajParam("PozicijaAutomobila", amt.getAutomobili().indexOf(a));
                     Coordinator.getInstanca().dodajParam("Automobil", a);
-                    Coordinator.getInstanca().otvoriMusterijaIzmeniFormu();
+                    Coordinator.getInstanca().otvoriAutomobilIzmeniFormu();
                 }
             }
         });

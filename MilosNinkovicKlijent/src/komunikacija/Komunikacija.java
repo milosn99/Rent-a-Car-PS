@@ -205,4 +205,17 @@ public class Komunikacija {
         }
     }
 
+    public void izmeni(Automobil automobil) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.OBRADI_AUTOMOBIL, automobil);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return;
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
 }

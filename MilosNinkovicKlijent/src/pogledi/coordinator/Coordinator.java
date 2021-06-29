@@ -93,4 +93,9 @@ public class Coordinator {
         paController.otvoriFormu();
     }
 
+    public void otvoriAutomobilIzmeniFormu() {
+        automobilController = new AutomobilController(new FormaAutomobil(glavniController.getFrmGlavna(), true));
+        automobilController.otvoriFormu(FormaMod.IZMENI);
+    }
+
 }
