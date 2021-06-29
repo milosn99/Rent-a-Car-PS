@@ -28,7 +28,7 @@ public class UcitajMarkeSO extends ApstraktnaGenerickaOperacija{
         marke = broker.vratiSve(new Marka(), kljuc);
     }
 
-    public List<Marka> getMesta() {
+    public List<Marka> getMarke() {
         return marke;
     }
 }

@@ -5,8 +5,11 @@
  */
 package komunikacija;
 
+import domen.Automobil;
 import domen.Korisnik;
+import domen.Marka;
 import domen.Mesto;
+import domen.Model;
 import domen.Musterija;
 import java.util.List;
 import java.io.IOException;
@@ -119,6 +122,58 @@ public class Komunikacija {
         Odgovor odgovor = (Odgovor) primalac.primi();
         if (odgovor.getGreska() == null) {
             return (List<Musterija>) odgovor.getPodatak();
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
+    public List<Model> ucitajModele() throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_MODELE, null);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return (List<Model>) odgovor.getPodatak();
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
+    public List<Marka> ucitajMarke() throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_MARKE, null);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return (List<Marka>) odgovor.getPodatak();
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
+    public void ubaciAutomobilNovi(Automobil automobil) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_AUTOMOBIL_NOVI, automobil);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return;
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
+    public void ubaciAutomobilPostojeci(Automobil automobil) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_AUTOMOBIL_POSTOJECI, automobil);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return;
         } else {
             throw odgovor.getGreska();
         }

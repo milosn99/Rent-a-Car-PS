@@ -75,7 +75,7 @@ public class MusterijaController {
             public void actionPerformed(ActionEvent e) {
                 try {
                     validacija();
-                    sacuvaj();
+                    izmeni();
                     JOptionPane.showMessageDialog(frmMusterija, "Uspesno ste izmenili musteriju", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     frmMusterija.dispose();
                     Coordinator.getInstanca().srediFormuPrikazMusterija();
@@ -96,7 +96,7 @@ public class MusterijaController {
                 }
             }
 
-            private void sacuvaj() throws Exception {
+            private void izmeni() throws Exception {
                 Musterija musterija = (Musterija) Coordinator.getInstanca().vratiParam("Musterija");
                 musterija.setIme(frmMusterija.getTxtIme().getText());
                 musterija.setPrezime(frmMusterija.getTxtPrezime().getText());

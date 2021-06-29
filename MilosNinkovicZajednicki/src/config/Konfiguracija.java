@@ -19,12 +19,12 @@ import java.util.logging.Logger;
 public class Konfiguracija {
 
     private static Konfiguracija instanca;
-    private Properties properti;
+    private Properties konfiguracija;
 
     private Konfiguracija() {
         try {
-            properti = new Properties();
-            properti.load(new FileInputStream("../MilosNinkovicZajednicki/konfiguracija.properties"));
+            konfiguracija = new Properties();
+            konfiguracija.load(new FileInputStream("../MilosNinkovicZajednicki/konfiguracija.properties"));
         } catch (IOException ex) {
             Logger.getLogger(Konfiguracija.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -37,22 +37,21 @@ public class Konfiguracija {
         return instanca;
     }
 
-    public Properties getProperti() {
-        return properti;
+    public Properties getKonfiguracija() {
+        return konfiguracija;
     }
-    
-    
+
     public String getProperty(String key) {
-        return properti.getProperty(key, "n/a");
+        return konfiguracija.getProperty(key, "n/a");
     }
-    
+
     public void setProperty(String key, String value) {
-        properti.setProperty(key, value);
+        konfiguracija.setProperty(key, value);
     }
 
     public void sacuvajIzmene() {
         try {
-            properti.store(new FileOutputStream("../MilosNinkovicZajednicki/konfiguracija.properties"), null);
+            konfiguracija.store(new FileOutputStream("../MilosNinkovicZajednicki/konfiguracija.properties"), null);
 
         } catch (IOException ex) {
             Logger.getLogger(Konfiguracija.class.getName()).log(Level.SEVERE, null, ex);

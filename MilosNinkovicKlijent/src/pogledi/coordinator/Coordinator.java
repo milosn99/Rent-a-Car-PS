@@ -7,10 +7,12 @@ package pogledi.coordinator;
 
 import java.util.HashMap;
 import java.util.Map;
+import pogledi.controller.AutomobilController;
 import pogledi.controller.GlavniController;
 import pogledi.controller.LogInController;
 import pogledi.controller.MusterijaController;
 import pogledi.controller.PrikaziMusterijeController;
+import pogledi.forme.FormaAutomobil;
 import pogledi.forme.FormaGlavna;
 import pogledi.forme.FormaLogIn;
 import pogledi.forme.FormaMusterija;
@@ -28,6 +30,7 @@ public class Coordinator {
     private GlavniController glavniController;
     private MusterijaController musterijaController;
     private PrikaziMusterijeController pmController;
+    private AutomobilController automobilController;
 
     private Coordinator() {
         parametri = new HashMap<>();
@@ -75,6 +78,11 @@ public class Coordinator {
 
     public void srediFormuPrikazMusterija() {
         pmController.izmenaPodataka();
+    }
+
+    public void otvoriAutomobilUbaciFormu() {
+        automobilController = new AutomobilController(new FormaAutomobil(glavniController.getFrmGlavna(), true));
+        automobilController.otvoriFormu(FormaMod.DODAJ);
     }
 
 }

@@ -5,8 +5,11 @@
  */
 package niti;
 
+import domen.Automobil;
 import domen.Korisnik;
+import domen.Marka;
 import domen.Mesto;
+import domen.Model;
 import domen.Musterija;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -82,6 +85,30 @@ public class KlijentNit extends Thread {
                             odgovor.setPodatak(musterijePoKriterijumu);
                             odgovor.setOperacija(Operacije.UCITAJ_MUSTERIJE);
                             odgovor.setGreska(null);
+                            break;
+                        case UCITAJ_MARKE:
+                            List<Marka> marke = Controller.getInstanca().ucitajMarke();
+                            odgovor.setPodatak(marke);
+                            odgovor.setOperacija(Operacije.UCITAJ_MARKE);
+                            odgovor.setGreska(null);
+                            break;
+                        case UCITAJ_MODELE:
+                            List<Model> modeli = Controller.getInstanca().ucitajModele();
+                            odgovor.setPodatak(modeli);
+                            odgovor.setOperacija(Operacije.UCITAJ_MARKE);
+                            odgovor.setGreska(null);
+                            break;
+                        case ZAPAMTI_AUTOMOBIL_POSTOJECI:
+                            Controller.getInstanca().kreiraj((Automobil) zahtev.getPodatak());
+                            odgovor.setOperacija(Operacije.ZAPAMTI_AUTOMOBIL_POSTOJECI);
+                            odgovor.setGreska(null);
+                            odgovor.setPodatak(null);
+                            break;
+                        case ZAPAMTI_AUTOMOBIL_NOVI:
+                            Controller.getInstanca().kreirajNovi((Automobil) zahtev.getPodatak());
+                            odgovor.setOperacija(Operacije.ZAPAMTI_AUTOMOBIL_POSTOJECI);
+                            odgovor.setGreska(null);
+                            odgovor.setPodatak(null);
                             break;
                     }
                 } catch (Exception e) {

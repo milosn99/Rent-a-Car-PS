@@ -92,4 +92,9 @@ public class Marka implements ApstraktniDomenskiObjekat {
         return marka;
     }
 
+    @Override
+    public String toString() {
+        return naziv;
+    }
+    
 }

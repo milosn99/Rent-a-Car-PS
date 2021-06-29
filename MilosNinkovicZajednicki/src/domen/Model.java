@@ -126,4 +126,9 @@ public class Model implements ApstraktniDomenskiObjekat {
         this.marka = marka;
     }
 
+    @Override
+    public String toString() {
+        return marka.getNaziv() + " " + oznaka;
+    }
+
 }

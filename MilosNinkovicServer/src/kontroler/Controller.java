@@ -5,13 +5,20 @@
  */
 package kontroler;
 
+import domen.Automobil;
 import domen.Korisnik;
+import domen.Marka;
 import domen.Mesto;
+import domen.Model;
 import domen.Musterija;
 import java.net.Socket;
 import java.util.List;
 import niti.Server;
+import operacija.automobil.KreirajAutomobilNoviSO;
+import operacija.automobil.KreirajAutomobilSO;
 import operacija.login.PrijaviKorisnikaSO;
+import operacija.marka.UcitajMarkeSO;
+import operacija.marka.UcitajModeleSO;
 import operacija.mesto.UcitajMestaSO;
 import operacija.musterija.KreirajMusterijuSO;
 import operacija.musterija.NadjiMusterijeSO;
@@ -68,6 +75,12 @@ public class Controller {
 
     }
 
+    public void kreiraj(Automobil automobil) throws Exception {
+        KreirajAutomobilSO operacija = new KreirajAutomobilSO();
+        operacija.izvrsi(automobil, null);
+
+    }
+
     public List<Musterija> ucitajMusterije() throws Exception {
         UcitajMusterijeSO operacija = new UcitajMusterijeSO();
         operacija.izvrsi(null, null);
@@ -83,6 +96,23 @@ public class Controller {
         NadjiMusterijeSO operacija = new NadjiMusterijeSO();
         operacija.izvrsi(new Musterija(), uslov);
         return operacija.getMusterije();
+    }
+
+    public List<Marka> ucitajMarke() throws Exception {
+        UcitajMarkeSO operacija = new UcitajMarkeSO();
+        operacija.izvrsi(null, null);
+        return operacija.getMarke();
+    }
+
+    public List<Model> ucitajModele() throws Exception {
+        UcitajModeleSO operacija = new UcitajModeleSO();
+        operacija.izvrsi(null, null);
+        return operacija.getModeli();
+    }
+
+    public void kreirajNovi(Automobil automobil) throws Exception {
+        KreirajAutomobilNoviSO operacija = new KreirajAutomobilNoviSO();
+        operacija.izvrsi(automobil, null);
     }
 
 }

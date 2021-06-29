@@ -28,7 +28,7 @@ public class UcitajModeleSO extends ApstraktnaGenerickaOperacija {
         modeli = broker.vratiSve(new Model(), " JOIN marka on (model.markaid=marka.markaid)");
     }
 
-    public List<Model> getMesta() {
+    public List<Model> getModeli() {
         return modeli;
     }
 }
