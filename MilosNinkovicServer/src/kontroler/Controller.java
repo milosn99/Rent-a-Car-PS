@@ -16,6 +16,8 @@ import java.util.List;
 import niti.Server;
 import operacija.automobil.KreirajAutomobilNoviSO;
 import operacija.automobil.KreirajAutomobilSO;
+import operacija.automobil.NadjiAutomobileSO;
+import operacija.automobil.UcitajAutomobileSO;
 import operacija.login.PrijaviKorisnikaSO;
 import operacija.marka.UcitajMarkeSO;
 import operacija.marka.UcitajModeleSO;
@@ -113,6 +115,18 @@ public class Controller {
     public void kreirajNovi(Automobil automobil) throws Exception {
         KreirajAutomobilNoviSO operacija = new KreirajAutomobilNoviSO();
         operacija.izvrsi(automobil, null);
+    }
+
+    public List<Automobil> ucitajAutomobile() throws Exception {
+        UcitajAutomobileSO operacija = new UcitajAutomobileSO();
+        operacija.izvrsi(null, null);
+        return operacija.getAutomobili();
+    }
+
+    public List<Automobil> ucitajAutomobile(String uslov) throws Exception {
+        NadjiAutomobileSO operacija = new NadjiAutomobileSO();
+        operacija.izvrsi(new Automobil(), uslov);
+        return operacija.getAutomobili();
     }
 
 }

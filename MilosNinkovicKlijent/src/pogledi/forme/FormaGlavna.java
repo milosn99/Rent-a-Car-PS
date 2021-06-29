@@ -44,6 +44,7 @@ public class FormaGlavna extends javax.swing.JFrame {
         miMusterijaPrikazi = new javax.swing.JMenuItem();
         menuAutomobil = new javax.swing.JMenu();
         miAutomobilDodaj = new javax.swing.JMenuItem();
+        miAutomobilPrikazi = new javax.swing.JMenuItem();
         menuRezervacija = new javax.swing.JMenu();
 
         jMenu1.setText("File");
@@ -75,6 +76,9 @@ public class FormaGlavna extends javax.swing.JFrame {
 
         miAutomobilDodaj.setText("Dodaj");
         menuAutomobil.add(miAutomobilDodaj);
+
+        miAutomobilPrikazi.setText("Prikazi");
+        menuAutomobil.add(miAutomobilPrikazi);
 
         jMenuBar2.add(menuAutomobil);
 
@@ -116,6 +120,7 @@ public class FormaGlavna extends javax.swing.JFrame {
     private javax.swing.JMenu menuMusterija;
     private javax.swing.JMenu menuRezervacija;
     private javax.swing.JMenuItem miAutomobilDodaj;
+    private javax.swing.JMenuItem miAutomobilPrikazi;
     private javax.swing.JMenuItem miMusterijaPrikazi;
     private javax.swing.JMenuItem miMusterijaUbaci;
     // End of variables declaration//GEN-END:variables
@@ -143,8 +148,12 @@ public class FormaGlavna extends javax.swing.JFrame {
     public void addMiMusterijaPrikaziActionListener(ActionListener actionListener) {
         miMusterijaPrikazi.addActionListener(actionListener);
     }
-    
-    public void addMiAutomobilDodajActionListener(ActionListener actionListener){
+
+    public void addMiAutomobilDodajActionListener(ActionListener actionListener) {
         miAutomobilDodaj.addActionListener(actionListener);
+    }
+
+    public void addMiAutomobilPrikaziActionListener(ActionListener actionListener) {
+        miAutomobilPrikazi.addActionListener(actionListener);
     }
 }

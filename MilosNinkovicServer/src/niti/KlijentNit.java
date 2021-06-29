@@ -110,6 +110,18 @@ public class KlijentNit extends Thread {
                             odgovor.setGreska(null);
                             odgovor.setPodatak(null);
                             break;
+                        case NADJI_AUTOMOBILE:
+                            List<Automobil> automobiliPoKriterijumu = Controller.getInstanca().ucitajAutomobile((String) zahtev.getPodatak());
+                            odgovor.setPodatak(automobiliPoKriterijumu);
+                            odgovor.setOperacija(Operacije.UCITAJ_MUSTERIJE);
+                            odgovor.setGreska(null);
+                            break;
+                        case UCITAJ_AUTOMOBILE:
+                            List<Automobil> automobili = Controller.getInstanca().ucitajAutomobile();
+                            odgovor.setPodatak(automobili);
+                            odgovor.setOperacija(Operacije.UCITAJ_MARKE);
+                            odgovor.setGreska(null);
+                            break;
                     }
                 } catch (Exception e) {
                     System.out.println("Desila se greska");

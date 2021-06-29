@@ -24,11 +24,11 @@ public class NadjiAutomobileSO extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
-        automobili = broker.vratiPoKriterijumu((Automobil)param, " JOIN model on (automobil.modelid=model.model.id) "
-                + "JOIN marka on (model.markaid=marka.markaid",kljuc);
+        automobili = broker.vratiPoKriterijumu((Automobil)param, " JOIN model on (automobil.modelid=model.modelid) "
+                + "JOIN marka on (model.markaid=marka.markaid)",kljuc);
     }
 
-    public List<Automobil> getMesta() {
+    public List<Automobil> getAutomobili() {
         return automobili;
     }
 }

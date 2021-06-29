@@ -16,50 +16,57 @@ import pogledi.forme.FormaGlavna;
  * @author milos
  */
 public class GlavniController {
-    
+
     private final FormaGlavna frmGlavna;
-    
+
     public GlavniController(FormaGlavna frmGlavna) {
         this.frmGlavna = frmGlavna;
         addActionListener();
     }
-    
+
     private void addActionListener() {
         frmGlavna.addMiMusterijaUbaciActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Coordinator.getInstanca().otvoriMusterijaUbaciFormu();
             }
-            
+
         });
-        
+
         frmGlavna.addMiMusterijaPrikaziActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Coordinator.getInstanca().otvoriPrikaziMusterijeFormu();
             }
         });
-        
+
         frmGlavna.addMiAutomobilDodajActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Coordinator.getInstanca().otvoriAutomobilUbaciFormu();
             }
         });
+
+        frmGlavna.addMiAutomobilPrikaziActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Coordinator.getInstanca().otvoriPrikaziAutomobileFormu();
+            }
+        });
     }
-    
+
     public void otvoriFormu() {
         pripremiFormu();
         frmGlavna.setVisible(true);
     }
-    
+
     private void pripremiFormu() {
         Korisnik korisnik = (Korisnik) Coordinator.getInstanca().vratiParam("korisnik");
         frmGlavna.getLblDobrodosli().setText(frmGlavna.getLblDobrodosli().getText() + " " + korisnik.getKorisnickoIme());
     }
-    
+
     public FormaGlavna getFrmGlavna() {
         return frmGlavna;
     }
-    
+
 }

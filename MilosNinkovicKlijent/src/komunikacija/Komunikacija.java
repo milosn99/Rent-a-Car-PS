@@ -179,4 +179,30 @@ public class Komunikacija {
         }
     }
 
+    public List<Automobil> vratiAutomobilePoUslovu(String uslov) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.NADJI_AUTOMOBILE, uslov);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return (List<Automobil>) odgovor.getPodatak();
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
+    public List<Automobil> ucitajAutomobile() throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_AUTOMOBILE, null);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return (List<Automobil>) odgovor.getPodatak();
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
 }
