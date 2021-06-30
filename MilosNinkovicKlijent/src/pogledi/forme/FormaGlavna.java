@@ -46,6 +46,8 @@ public class FormaGlavna extends javax.swing.JFrame {
         miAutomobilDodaj = new javax.swing.JMenuItem();
         miAutomobilPrikazi = new javax.swing.JMenuItem();
         menuRezervacija = new javax.swing.JMenu();
+        miRezervacijaDodaj = new javax.swing.JMenuItem();
+        miRezervacijaPretrazi = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -83,6 +85,18 @@ public class FormaGlavna extends javax.swing.JFrame {
         jMenuBar2.add(menuAutomobil);
 
         menuRezervacija.setText("Rezervacija");
+
+        miRezervacijaDodaj.setText("Dodaj");
+        menuRezervacija.add(miRezervacijaDodaj);
+
+        miRezervacijaPretrazi.setText("Pretrazi");
+        miRezervacijaPretrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRezervacijaPretraziActionPerformed(evt);
+            }
+        });
+        menuRezervacija.add(miRezervacijaPretrazi);
+
         jMenuBar2.add(menuRezervacija);
 
         setJMenuBar(jMenuBar2);
@@ -107,6 +121,10 @@ public class FormaGlavna extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void miRezervacijaPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRezervacijaPretraziActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miRezervacijaPretraziActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
@@ -123,6 +141,8 @@ public class FormaGlavna extends javax.swing.JFrame {
     private javax.swing.JMenuItem miAutomobilPrikazi;
     private javax.swing.JMenuItem miMusterijaPrikazi;
     private javax.swing.JMenuItem miMusterijaUbaci;
+    private javax.swing.JMenuItem miRezervacijaDodaj;
+    private javax.swing.JMenuItem miRezervacijaPretrazi;
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JLabel getLblDobrodosli() {
@@ -155,5 +175,13 @@ public class FormaGlavna extends javax.swing.JFrame {
 
     public void addMiAutomobilPrikaziActionListener(ActionListener actionListener) {
         miAutomobilPrikazi.addActionListener(actionListener);
+    }
+
+    public void addMiRezervacijaDodajActionListener(ActionListener actionListener) {
+        miRezervacijaDodaj.addActionListener(actionListener);
+    }
+
+    public void addMiRezervacijaPrikaziActionListener(ActionListener actionListener) {
+        miRezervacijaPretrazi.addActionListener(actionListener);
     }
 }

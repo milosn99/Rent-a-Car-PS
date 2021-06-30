@@ -139,10 +139,10 @@ public class AutomobilController {
                 try {
                     validacija();
                     izmeni();
-                    JOptionPane.showMessageDialog(frmAutomobil, "Uspesno ste uneli automobil", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(frmAutomobil, "Uspesno ste izmenili automobil", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     frmAutomobil.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(frmAutomobil, "Greska prilikom ubacivanja", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frmAutomobil, "Greska prilikom izmene", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
@@ -240,6 +240,7 @@ public class AutomobilController {
                 frmAutomobil.getTxtKubikaza().setEnabled(false);
                 frmAutomobil.getTxtJacinaMotora().setEnabled(false);
                 frmAutomobil.getCbGorivo().setEnabled(false);
+                frmAutomobil.getTxtRegistracija().setEnabled(false);
 
                 Automobil automobil = (Automobil) Coordinator.getInstanca().vratiParam("Automobil");
 

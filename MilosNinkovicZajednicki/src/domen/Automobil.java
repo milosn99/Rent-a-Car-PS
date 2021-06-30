@@ -108,7 +108,7 @@ public class Automobil implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiPrimarniKljuc() {
-        return "automobil.registracija =" + registracija;
+        return "automobil.registracija = '" + registracija+"'";
     }
 
     @Override

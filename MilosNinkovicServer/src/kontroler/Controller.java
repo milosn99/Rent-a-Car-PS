@@ -11,6 +11,7 @@ import domen.Marka;
 import domen.Mesto;
 import domen.Model;
 import domen.Musterija;
+import domen.Rezervacija;
 import java.net.Socket;
 import java.util.List;
 import niti.Server;
@@ -27,6 +28,10 @@ import operacija.musterija.KreirajMusterijuSO;
 import operacija.musterija.NadjiMusterijeSO;
 import operacija.musterija.ObradiMusterijuSO;
 import operacija.musterija.UcitajMusterijeSO;
+import operacija.rezervacija.KreirajRezervacijuSO;
+import operacija.rezervacija.NadjiRezervacijeSO;
+import operacija.rezervacija.ObrisiRezervacijuSO;
+import operacija.rezervacija.UcitajRezervacijeSO;
 
 /**
  *
@@ -134,4 +139,31 @@ public class Controller {
         ObradiAutomobilSO operacija = new ObradiAutomobilSO();
         operacija.izvrsi(automobil, null);
     }
+
+    public List<Rezervacija> ucitajRezervacije() throws Exception {
+        UcitajRezervacijeSO operacija = new UcitajRezervacijeSO();
+        operacija.izvrsi(null, null);
+        return operacija.getRezervacije();
+    }
+
+    public List<Rezervacija> ucitajRezervacije(String uslov) throws Exception {
+        NadjiRezervacijeSO operacija = new NadjiRezervacijeSO();
+        operacija.izvrsi(new Automobil(), uslov);
+        return operacija.getRezervacije();
+    }
+
+    public void obrisi(Rezervacija rezervacija) throws Exception {
+        ObrisiRezervacijuSO operacija = new ObrisiRezervacijuSO();
+        operacija.izvrsi(rezervacija, null);
+    }
+
+    public void kreirajRezervaciju(Rezervacija rezervacija) throws Exception {
+        KreirajRezervacijuSO operacija = new KreirajRezervacijuSO();
+        operacija.izvrsi(rezervacija, null);
+    }
+
+    public void kreirajNoviRezervacija(Rezervacija rezervacija) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

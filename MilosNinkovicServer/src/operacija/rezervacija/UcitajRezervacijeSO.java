@@ -31,7 +31,7 @@ public class UcitajRezervacijeSO extends ApstraktnaGenerickaOperacija{
                 + "JOIN marka on (model.markaid=marka.markaid)");
     }
 
-    public List<Rezervacija> getMesta() {
+    public List<Rezervacija> getRezervacije() {
         return rezervacije;
     }
 }

@@ -98,4 +98,12 @@ public class Coordinator {
         automobilController.otvoriFormu(FormaMod.IZMENI);
     }
 
+    public void otvoriPrikaziRezervacijeFormu() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void otvoriRezervacijaUbaciFormu() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

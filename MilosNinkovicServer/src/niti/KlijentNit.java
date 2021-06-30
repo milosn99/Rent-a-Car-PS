@@ -11,6 +11,7 @@ import domen.Marka;
 import domen.Mesto;
 import domen.Model;
 import domen.Musterija;
+import domen.Rezervacija;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -124,6 +125,36 @@ public class KlijentNit extends Thread {
                             break;
                         case OBRADI_AUTOMOBIL:
                             Controller.getInstanca().izmeni((Automobil) zahtev.getPodatak());
+                            odgovor.setOperacija(Operacije.OBRADI_AUTOMOBIL);
+                            odgovor.setGreska(null);
+                            odgovor.setPodatak(null);
+                            break;
+                        case ZAPAMTI_REZERVACIJU_POSTOJECI:
+                            Controller.getInstanca().kreirajRezervaciju((Rezervacija) zahtev.getPodatak());
+                            odgovor.setOperacija(Operacije.ZAPAMTI_AUTOMOBIL_POSTOJECI);
+                            odgovor.setGreska(null);
+                            odgovor.setPodatak(null);
+                            break;
+                        case ZAPAMTI_REZERVACIJU_NOVI:
+                            Controller.getInstanca().kreirajNoviRezervacija((Rezervacija) zahtev.getPodatak());
+                            odgovor.setOperacija(Operacije.ZAPAMTI_AUTOMOBIL_POSTOJECI);
+                            odgovor.setGreska(null);
+                            odgovor.setPodatak(null);
+                            break;
+                        case UCITAJ_REZERVACIJE:
+                            List<Rezervacija> rezervacije = Controller.getInstanca().ucitajRezervacije();
+                            odgovor.setPodatak(rezervacije);
+                            odgovor.setOperacija(Operacije.UCITAJ_MARKE);
+                            odgovor.setGreska(null);
+                            break;
+                        case NADJI_REZERVACIJE:
+                            List<Rezervacija> rezervacijePoKriterijumu = Controller.getInstanca().ucitajRezervacije((String) zahtev.getPodatak());
+                            odgovor.setPodatak(rezervacijePoKriterijumu);
+                            odgovor.setOperacija(Operacije.UCITAJ_MUSTERIJE);
+                            odgovor.setGreska(null);
+                            break;
+                        case OBRISI_REZERVACIJU:
+                            Controller.getInstanca().obrisi((Rezervacija) zahtev.getPodatak());
                             odgovor.setOperacija(Operacije.OBRADI_AUTOMOBIL);
                             odgovor.setGreska(null);
                             odgovor.setPodatak(null);

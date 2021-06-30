@@ -6,8 +6,6 @@
 package operacija.automobil;
 
 import domen.Automobil;
-import operacija.musterija.*;
-import domen.Musterija;
 import operacija.ApstraktnaGenerickaOperacija;
 
 /**

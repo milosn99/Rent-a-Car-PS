@@ -220,8 +220,7 @@ public class FormaAutomobil extends javax.swing.JDialog {
 
         jLabel3.setText("Segment:");
 
-        cbSegment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mini", "Mali", "Srednji", "Kupe", "Limuzina", "SUV", "Off-road" }));
-        cbSegment.setSelectedIndex(5);
+        cbSegment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mini", "Mali", "Srednji", "Kupe", "Limuzina", "SUV", "Off-road", "Karavan" }));
 
         javax.swing.GroupLayout panelNoviLayout = new javax.swing.GroupLayout(panelNovi);
         panelNovi.setLayout(panelNoviLayout);

@@ -53,6 +53,20 @@ public class GlavniController {
                 Coordinator.getInstanca().otvoriPrikaziAutomobileFormu();
             }
         });
+
+        frmGlavna.addMiRezervacijaDodajActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Coordinator.getInstanca().otvoriRezervacijaUbaciFormu();
+            }
+        });
+
+        frmGlavna.addMiRezervacijaPrikaziActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Coordinator.getInstanca().otvoriPrikaziRezervacijeFormu();
+            }
+        });
     }
 
     public void otvoriFormu() {
