@@ -28,6 +28,7 @@ import operacija.musterija.KreirajMusterijuSO;
 import operacija.musterija.NadjiMusterijeSO;
 import operacija.musterija.ObradiMusterijuSO;
 import operacija.musterija.UcitajMusterijeSO;
+import operacija.rezervacija.KreirajRezervacijuNoviSO;
 import operacija.rezervacija.KreirajRezervacijuSO;
 import operacija.rezervacija.NadjiRezervacijeSO;
 import operacija.rezervacija.ObrisiRezervacijuSO;
@@ -162,8 +163,9 @@ public class Controller {
         operacija.izvrsi(rezervacija, null);
     }
 
-    public void kreirajNoviRezervacija(Rezervacija rezervacija) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void kreirajNoviRezervacija(Rezervacija rezervacija) throws Exception {
+        KreirajRezervacijuNoviSO operacija = new KreirajRezervacijuNoviSO();
+        operacija.izvrsi(rezervacija, null);
     }
 
 }

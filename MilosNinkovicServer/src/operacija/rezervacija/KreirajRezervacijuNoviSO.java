@@ -23,6 +23,13 @@ public class KreirajRezervacijuNoviSO extends ApstraktnaGenerickaOperacija{
         if (param == null || !(param instanceof Rezervacija)) {
             throw new Exception("Sistem nije dobio musteriju");
         }
+        
+        Rezervacija rezervacija = (Rezervacija) param;
+        if(rezervacija.getAutomobil()==null || rezervacija.getMusterija()==null 
+                || rezervacija.getDatumDo()==null || rezervacija.getDatumOd()==null
+                || rezervacija.getDatumOd().after(rezervacija.getDatumDo())){
+            throw new Exception("Lose uneseni podaci");
+        }
     }
 
     @Override

@@ -25,6 +25,11 @@ public class Musterija implements ApstraktniDomenskiObjekat {
     public Musterija() {
     }
 
+    @Override
+    public String toString() {
+        return ime + " " + prezime + " " + mesto;
+    }
+
     public Musterija(Long musterijaId, String ime, String prezime, String adresa, Mesto mesto) {
         this.musterijaId = musterijaId;
         this.ime = ime;

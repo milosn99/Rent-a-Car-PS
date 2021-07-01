@@ -31,6 +31,11 @@ public class Automobil implements ApstraktniDomenskiObjekat {
     public Automobil() {
     }
 
+    @Override
+    public String toString() {
+        return model + " (" + godiste+". god, "+cena+" EUR "+ gorivo + ", tablice: " + registracija+")";
+    }
+
     public Automobil(String registracija, int godiste, int cena, int kilometraza, BigDecimal potrosnja, String gorivo, int kubikaza, int jacinaMotora, Model model) {
         this.registracija = registracija;
         this.godiste = godiste;

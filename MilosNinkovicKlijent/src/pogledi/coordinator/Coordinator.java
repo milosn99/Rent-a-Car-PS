@@ -13,12 +13,14 @@ import pogledi.controller.LogInController;
 import pogledi.controller.MusterijaController;
 import pogledi.controller.PrikaziAutomobileController;
 import pogledi.controller.PrikaziMusterijeController;
+import pogledi.controller.RezervacijaController;
 import pogledi.forme.FormaAutomobil;
 import pogledi.forme.FormaGlavna;
 import pogledi.forme.FormaLogIn;
 import pogledi.forme.FormaMusterija;
 import pogledi.forme.FormaPrikaziAutomobile;
 import pogledi.forme.FormaPrikaziMusterije;
+import pogledi.forme.FormaRezervacija;
 import pogledi.forme.util.FormaMod;
 
 /**
@@ -34,6 +36,7 @@ public class Coordinator {
     private PrikaziMusterijeController pmController;
     private AutomobilController automobilController;
     private PrikaziAutomobileController paController;
+    private RezervacijaController rezervacijaController;
 
     private Coordinator() {
         parametri = new HashMap<>();
@@ -99,11 +102,12 @@ public class Coordinator {
     }
 
     public void otvoriPrikaziRezervacijeFormu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     public void otvoriRezervacijaUbaciFormu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        rezervacijaController = new RezervacijaController(new FormaRezervacija(glavniController.getFrmGlavna(), true));
+        rezervacijaController.otvoriFormu();
     }
 
 }

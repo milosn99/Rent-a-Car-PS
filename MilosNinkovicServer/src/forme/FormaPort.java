@@ -5,7 +5,7 @@
  */
 package forme;
 
-import config.Konfiguracija;
+import konfiguracija.Konfiguracija;
 import javax.swing.JOptionPane;
 
 /**

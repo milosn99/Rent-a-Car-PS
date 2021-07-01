@@ -11,6 +11,7 @@ import domen.Marka;
 import domen.Mesto;
 import domen.Model;
 import domen.Musterija;
+import domen.Rezervacija;
 import java.util.List;
 import java.io.IOException;
 import java.net.Socket;
@@ -207,6 +208,32 @@ public class Komunikacija {
 
     public void izmeni(Automobil automobil) throws Exception {
         Zahtev zahtev = new Zahtev(Operacije.OBRADI_AUTOMOBIL, automobil);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return;
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
+    public void ubaci(Rezervacija rezervacija) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_REZERVACIJU_POSTOJECI, rezervacija);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return;
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
+    public void ubaciRezervacijuNovi(Rezervacija rezervacija) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_REZERVACIJU_NOVI, rezervacija);
 
         posiljalac.posalji(zahtev);
 
