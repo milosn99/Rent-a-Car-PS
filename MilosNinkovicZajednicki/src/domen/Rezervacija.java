@@ -128,7 +128,7 @@ public class Rezervacija implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiPrimarniKljuc() {
-        return "rezervacija.datumod= '" + new java.sql.Date(datumOd.getTime()) + "' and rezervacija.registracija=" + automobil.getRegistracija();
+        return "rezervacija.datumod= '" + new java.sql.Date(datumOd.getTime()) + "' and rezervacija.registracija='" + automobil.getRegistracija()+"'";
     }
 
     @Override

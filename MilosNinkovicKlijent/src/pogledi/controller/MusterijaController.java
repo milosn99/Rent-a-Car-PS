@@ -45,10 +45,10 @@ public class MusterijaController {
                 try {
                     validacija();
                     sacuvaj();
-                    JOptionPane.showMessageDialog(frmMusterija, "Uspesno ste uneli musteriju", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(frmMusterija, "Sistem je uspesno zapamtio musteriju", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     frmMusterija.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(frmMusterija, "Greska prilikom ubacivanja", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frmMusterija, "Sistem nije uspeo da zapamti musteriju", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -76,11 +76,11 @@ public class MusterijaController {
                 try {
                     validacija();
                     izmeni();
-                    JOptionPane.showMessageDialog(frmMusterija, "Uspesno ste izmenili musteriju", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(frmMusterija, "Sistem je uspesno obradio musteriju", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     frmMusterija.dispose();
                     Coordinator.getInstanca().srediFormuPrikazMusterija();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(frmMusterija, "Greska prilikom izmene", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frmMusterija, "Sistem nije uspeo da obradi musteriju", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
             }
 

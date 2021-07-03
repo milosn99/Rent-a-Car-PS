@@ -245,4 +245,43 @@ public class Komunikacija {
         }
     }
 
+    public List<Rezervacija> vratiRezervacijePoUslovu(String uslov) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.NADJI_REZERVACIJE, uslov);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return (List<Rezervacija>) odgovor.getPodatak();
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
+    public List<Rezervacija> ucitajRezervacije() throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_REZERVACIJE, null);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return (List<Rezervacija>) odgovor.getPodatak();
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
+    public void obrisiRezervaciju(Rezervacija rezervacija) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.OBRISI_REZERVACIJU, rezervacija);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return;
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
 }

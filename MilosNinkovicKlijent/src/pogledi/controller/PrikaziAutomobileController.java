@@ -85,7 +85,7 @@ public class PrikaziAutomobileController {
                     AutomobilModelTabele amt = new AutomobilModelTabele(automobili);
                     frmPA.getTabelaAutomobili().setModel(amt);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(frmPA, "Greska prilikom pokusaja pretrage", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frmPA, "Sistem nije uspeo da nađe automobile po zadatim kriterijumima", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

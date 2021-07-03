@@ -49,11 +49,11 @@ public class LogInController {
                     Komunikacija.getInstanca().konekcija();
                     Korisnik k = Komunikacija.getInstanca().logIn(korisnickoIme,sifra);
                     Coordinator.getInstanca().dodajParam("korisnik", k);
-//                    JOptionPane.showMessageDialog(frmLogIn, "Dobrodosao "+ k.getKorisnickoIme(),"Uspeh",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(frmLogIn, "Uspesno ste se prijavili na sistem. Dobrodosao "+ k.getKorisnickoIme(),"Uspeh",JOptionPane.INFORMATION_MESSAGE);
                     Coordinator.getInstanca().otvoriGlavnuFormu();
                     frmLogIn.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(frmLogIn, "Korisnik ne postoji", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frmLogIn, "Sistem nije uspeo da pronađe korisnika sa navedenim parametrima", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
             }
 

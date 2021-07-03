@@ -184,4 +184,5 @@ public class FormaGlavna extends javax.swing.JFrame {
     public void addMiRezervacijaPrikaziActionListener(ActionListener actionListener) {
         miRezervacijaPretrazi.addActionListener(actionListener);
     }
+
 }

@@ -13,6 +13,7 @@ import pogledi.controller.LogInController;
 import pogledi.controller.MusterijaController;
 import pogledi.controller.PrikaziAutomobileController;
 import pogledi.controller.PrikaziMusterijeController;
+import pogledi.controller.PrikaziRezervacijeController;
 import pogledi.controller.RezervacijaController;
 import pogledi.forme.FormaAutomobil;
 import pogledi.forme.FormaGlavna;
@@ -20,6 +21,7 @@ import pogledi.forme.FormaLogIn;
 import pogledi.forme.FormaMusterija;
 import pogledi.forme.FormaPrikaziAutomobile;
 import pogledi.forme.FormaPrikaziMusterije;
+import pogledi.forme.FormaPrikaziRezervacije;
 import pogledi.forme.FormaRezervacija;
 import pogledi.forme.util.FormaMod;
 
@@ -37,6 +39,7 @@ public class Coordinator {
     private AutomobilController automobilController;
     private PrikaziAutomobileController paController;
     private RezervacijaController rezervacijaController;
+    private PrikaziRezervacijeController prController;
 
     private Coordinator() {
         parametri = new HashMap<>();
@@ -102,7 +105,8 @@ public class Coordinator {
     }
 
     public void otvoriPrikaziRezervacijeFormu() {
-
+        prController = new PrikaziRezervacijeController(new FormaPrikaziRezervacije(glavniController.getFrmGlavna(), true));
+        prController.otvoriFormu();
     }
 
     public void otvoriRezervacijaUbaciFormu() {

@@ -149,7 +149,7 @@ public class Controller {
 
     public List<Rezervacija> ucitajRezervacije(String uslov) throws Exception {
         NadjiRezervacijeSO operacija = new NadjiRezervacijeSO();
-        operacija.izvrsi(new Automobil(), uslov);
+        operacija.izvrsi(new Rezervacija(), uslov);
         return operacija.getRezervacije();
     }
 

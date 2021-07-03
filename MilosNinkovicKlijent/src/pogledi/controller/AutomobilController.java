@@ -70,10 +70,10 @@ public class AutomobilController {
                 try {
                     validacija();
                     sacuvaj();
-                    JOptionPane.showMessageDialog(frmAutomobil, "Uspesno ste uneli automobil", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(frmAutomobil, "Sistem je uspesno zapamtio automobil", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     frmAutomobil.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(frmAutomobil, "Greska prilikom ubacivanja", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frmAutomobil, "Sistem nije uspeo da zapamti automobil", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
@@ -139,10 +139,10 @@ public class AutomobilController {
                 try {
                     validacija();
                     izmeni();
-                    JOptionPane.showMessageDialog(frmAutomobil, "Uspesno ste izmenili automobil", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(frmAutomobil, "Sistem je uspesno obradio automobil", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     frmAutomobil.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(frmAutomobil, "Greska prilikom izmene", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frmAutomobil, "Sistem nije uspeo da obradi automobil", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
@@ -190,7 +190,7 @@ public class AutomobilController {
             popuniCbMarka();
             pripremiMod(formaMod);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(frmAutomobil, "Greska prilikom otvaranja forme", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frmAutomobil, ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
