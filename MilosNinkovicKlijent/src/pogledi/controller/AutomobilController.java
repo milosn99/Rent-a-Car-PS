@@ -179,6 +179,8 @@ public class AutomobilController {
                 Automobil automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model);
 
                 Komunikacija.getInstanca().izmeni(automobil);
+                Coordinator.getInstanca().dodajParam("Automobil", automobil);
+
             }
         });
     }
@@ -223,6 +225,7 @@ public class AutomobilController {
                 frmAutomobil.getTxtOznaka().setEnabled(false);
                 frmAutomobil.getCbSegment().setEnabled(false);
                 frmAutomobil.getPanelPostojeci().setEnabled(true);
+                frmAutomobil.getBtnIzmeni().setVisible(false);
                 break;
             case IZMENI:
                 frmAutomobil.getPanelNovi().setEnabled(false);

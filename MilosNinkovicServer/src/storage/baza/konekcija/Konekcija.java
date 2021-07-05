@@ -36,8 +36,8 @@ public class Konekcija {
             String user = Konfiguracija.getInstanca().getProperty("user");
             String pass = Konfiguracija.getInstanca().getProperty("password");
             System.out.println(pass);
-            konekcija = DriverManager.getConnection("jdbc:mysql://localhost:3306/rentacar", "root", "newrootpassword");
-            System.out.println("povezao se");
+            konekcija = DriverManager.getConnection(url, user, pass);
+            System.out.println("Uspostavljena konekcija sa bazom podataka");
             konekcija.setAutoCommit(false);
         }
         return konekcija;

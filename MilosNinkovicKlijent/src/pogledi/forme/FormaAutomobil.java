@@ -393,4 +393,8 @@ public class FormaAutomobil extends javax.swing.JDialog {
     private javax.swing.JTextField txtPotrosnja;
     private javax.swing.JTextField txtRegistracija;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JButton getBtnIzmeni() {
+        return btnIzmeni;
+    }
 }

@@ -82,6 +82,7 @@ public class PrikaziAutomobileController {
                         uslov += " AND automobil.godiste<" + Integer.parseInt(godisteDo);
                     }
                     List<Automobil> automobili = Komunikacija.getInstanca().vratiAutomobilePoUslovu(uslov);
+                    JOptionPane.showMessageDialog(frmPA, "Sistem je uspeo da nađe automobile po zadatim kriterijumima", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     AutomobilModelTabele amt = new AutomobilModelTabele(automobili);
                     frmPA.getTabelaAutomobili().setModel(amt);
                 } catch (Exception ex) {
@@ -100,6 +101,7 @@ public class PrikaziAutomobileController {
                     Coordinator.getInstanca().dodajParam("PozicijaAutomobila", amt.getAutomobili().indexOf(a));
                     Coordinator.getInstanca().dodajParam("Automobil", a);
                     Coordinator.getInstanca().otvoriAutomobilIzmeniFormu();
+                    izmenaPodataka();
                 }
             }
         });
@@ -113,8 +115,8 @@ public class PrikaziAutomobileController {
     }
 
     public void izmenaPodataka() {
-        MusterijeModelTabele mmt = (MusterijeModelTabele) frmPA.getTabelaAutomobili().getModel();
-        mmt.izmeniElement((int) Coordinator.getInstanca().vratiParam("PozicijaAutomobila"), (Musterija) Coordinator.getInstanca().vratiParam("Automobil"));
+        AutomobilModelTabele amt =(AutomobilModelTabele) frmPA.getTabelaAutomobili().getModel();
+        amt.izmeniElement((int) Coordinator.getInstanca().vratiParam("PozicijaAutomobila"), (Automobil) Coordinator.getInstanca().vratiParam("Automobil"));
     }
 
     private void popuniCbModel() throws Exception {

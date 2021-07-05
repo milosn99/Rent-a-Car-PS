@@ -57,10 +57,11 @@ public class PrikaziMusterijeController {
                         uslov += " AND musterija.prezime= '" + prezime + "'";
                     }
                     List<Musterija> musterije = Komunikacija.getInstanca().vratiMusterijePoUslovu(uslov);
+                    JOptionPane.showMessageDialog(frmPM, "Sistem je nasao musterije po zadatom kriterijumu", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     MusterijeModelTabele mmt = new MusterijeModelTabele(musterije);
                     frmPM.getTabelaMusterije().setModel(mmt);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(frmPM, "Greska prilikom pokusaja pretrage", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frmPM, "Sistem nije nasao musterije po zadatom kriterijumu", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

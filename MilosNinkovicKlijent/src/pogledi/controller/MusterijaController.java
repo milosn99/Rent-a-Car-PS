@@ -53,13 +53,13 @@ public class MusterijaController {
             }
 
             private void validacija() throws Exception {
-                if (frmMusterija.getTxtAdresa() == null || frmMusterija.getTxtAdresa().equals("")) {
+                if (frmMusterija.getTxtAdresa() == null || frmMusterija.getTxtAdresa().getText().equals("")) {
                     throw new Exception("Nije unesena adresa");
                 }
-                if (frmMusterija.getTxtIme() == null || frmMusterija.getTxtIme().equals("")) {
+                if (frmMusterija.getTxtIme() == null || frmMusterija.getTxtIme().getText().equals("")) {
                     throw new Exception("Nije uneseno ime");
                 }
-                if (frmMusterija.getTxtPrezime() == null || frmMusterija.getTxtPrezime().equals("")) {
+                if (frmMusterija.getTxtPrezime() == null || frmMusterija.getTxtPrezime().getText().equals("")) {
                     throw new Exception("Nije uneseno prezime");
                 }
             }
@@ -85,13 +85,13 @@ public class MusterijaController {
             }
 
             private void validacija() throws Exception {
-                if (frmMusterija.getTxtAdresa() == null || frmMusterija.getTxtAdresa().equals("")) {
+                if (frmMusterija.getTxtAdresa() == null || frmMusterija.getTxtAdresa().getText().equals("")) {
                     throw new Exception("Nije unesena adresa");
                 }
-                if (frmMusterija.getTxtIme() == null || frmMusterija.getTxtIme().equals("")) {
+                if (frmMusterija.getTxtIme() == null || frmMusterija.getTxtIme().getText().equals("")) {
                     throw new Exception("Nije uneseno ime");
                 }
-                if (frmMusterija.getTxtPrezime() == null || frmMusterija.getTxtPrezime().equals("")) {
+                if (frmMusterija.getTxtPrezime() == null || frmMusterija.getTxtPrezime().getText().equals("")) {
                     throw new Exception("Nije uneseno prezime");
                 }
             }

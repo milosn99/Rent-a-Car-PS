@@ -60,6 +60,8 @@ public class PrikaziRezervacijeController {
                         uslov += "datumDo<'" + new java.sql.Date(datumDo.getTime()) + "'";
                     }
                     List<Rezervacija> rezervacija = Komunikacija.getInstanca().vratiRezervacijePoUslovu(uslov);
+                    JOptionPane.showMessageDialog(frmPR, "Sistem je uspeo da nađe rezervacije po zadatim kriterijumima", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+
                     RezervacijeModelTabele rmt = new RezervacijeModelTabele(rezervacija);
                     frmPR.getTabelaRezervacije().setModel(rmt);
                 } catch (Exception ex) {
