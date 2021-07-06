@@ -6,20 +6,24 @@
 package pogledi.controller;
 
 import domen.Automobil;
+import domen.Korisnik;
 import domen.Mesto;
 import domen.Model;
 import domen.Musterija;
 import domen.Rezervacija;
+import domen.StavkaRezervacije;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
+import pogledi.coordinator.Coordinator;
 import pogledi.forme.FormaRezervacija;
-import pogledi.forme.util.FormaMod;
+import pogledi.forme.kompoente.AutomobilModelTabele;
 
 /**
  *
@@ -35,75 +39,60 @@ public class RezervacijaController {
     }
 
     private void addActionListeners() {
-        frmRezervacija.addRadioNoviActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frmRezervacija.getCbMusterija().setEnabled(false);
-                frmRezervacija.getCbMesto().setEnabled(true);
-                frmRezervacija.getTxtIme().setEnabled(true);
-                frmRezervacija.getTxtPrezime().setEnabled(true);
-                frmRezervacija.getTxtAdresa().setEnabled(true);
-            }
-        });
-
-        frmRezervacija.addRadioPostojeciActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frmRezervacija.getCbMusterija().setEnabled(true);
-                frmRezervacija.getCbMesto().setEnabled(false);
-                frmRezervacija.getTxtIme().setEnabled(false);
-                frmRezervacija.getTxtPrezime().setEnabled(false);
-                frmRezervacija.getTxtAdresa().setEnabled(false);
-            }
-        });
 
         frmRezervacija.addBtnSacuvajActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     Rezervacija rezervacija = validacija();
-                    if (frmRezervacija.getRadioNovi().isSelected()) {
-                        Komunikacija.getInstanca().ubaciRezervacijuNovi(rezervacija);
-                    } else {
-                        Komunikacija.getInstanca().ubaci(rezervacija);
-                    }
-                    JOptionPane.showMessageDialog(frmRezervacija, "Uspesno uneseno", "Greska", JOptionPane.INFORMATION_MESSAGE);
+                    System.out.println(rezervacija);
+                    Komunikacija.getInstanca().ubaci(rezervacija);
+                    JOptionPane.showMessageDialog(frmRezervacija, "Sistem je uspesno zapamtio rezervaciju", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     frmRezervacija.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(frmRezervacija, ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frmRezervacija, "Sistem nije uspesno zapamtio rezervaciju", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
 
             private Rezervacija validacija() throws Exception {
-                Musterija musterija;
-                if (frmRezervacija.getRadioPostojeci().isSelected()) {
-                    musterija = (Musterija) frmRezervacija.getCbMusterija().getSelectedItem();
-                } else {
-                    String ime = frmRezervacija.getTxtIme().getText().trim();
-                    String prezime = frmRezervacija.getTxtPrezime().getText().trim();
-                    String adresa = frmRezervacija.getTxtAdresa().getText().trim();
-                    Mesto mesto = (Mesto) frmRezervacija.getCbMesto().getSelectedItem();
 
-                    if (ime == null || ime.equals("")
-                            || prezime == null || prezime.equals("")
-                            || adresa == null || adresa.equals("")) {
-                        throw new Exception("Nisu uneseni svi podaci za musteriju");
-                    }
-
-                    musterija = new Musterija(Long.MIN_VALUE, ime, prezime, adresa, mesto);
-                }
-
+                Musterija musterija = (Musterija) frmRezervacija.getCbMusterija().getSelectedItem();
                 Date datumOd = frmRezervacija.getDcDatumOd().getDate();
                 Date datumDo = frmRezervacija.getDcDatumDo().getDate();
-                Automobil automobil = (Automobil) frmRezervacija.getCbAutomobil().getSelectedItem();
 
-                if (musterija == null || datumDo == null || datumOd == null || datumDo.before(datumOd)) {
+                if (musterija == null || datumDo == null || datumOd
+                        == null || datumDo.before(datumOd)) {
                     throw new Exception("Losi podaci za rezervaciju");
                 }
 
-                Rezervacija rezervacija = new Rezervacija(datumDo, datumOd, musterija, automobil);
+                Rezervacija rezervacija = new Rezervacija(datumDo, datumOd, musterija, (Korisnik) Coordinator.getInstanca().vratiParam("korisnik"));
+
+                AutomobilModelTabele amt = (AutomobilModelTabele) frmRezervacija.getTabelaAutomobili().getModel();
+                List<StavkaRezervacije> stavke = new ArrayList<>();
+                for (Automobil automobil : amt.getAutomobili()) {
+                    stavke.add(new StavkaRezervacije(rezervacija, automobil));
+                }
+                if(stavke.isEmpty()){
+                    throw new Exception("Prazna lista auta");
+                }
+                rezervacija.setAutomobili(stavke);
                 return rezervacija;
+            }
+
+        }
+        );
+
+        frmRezervacija.addBtnDodajActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AutomobilModelTabele amt = (AutomobilModelTabele) frmRezervacija.getTabelaAutomobili().getModel();
+                if (amt.getAutomobili().contains((Automobil) frmRezervacija.getCbAutomobil().getSelectedItem())) {
+                    JOptionPane.showMessageDialog(frmRezervacija, "Automobil je vec u listi", "Greska", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                amt.dodajAutomobil((Automobil) frmRezervacija.getCbAutomobil().getSelectedItem());
+                frmRezervacija.getTabelaAutomobili().setModel(amt);
             }
         });
     }
@@ -113,25 +102,21 @@ public class RezervacijaController {
             pripremiFormu();
             frmRezervacija.setVisible(true);
         } catch (Exception ex) {
-            Logger.getLogger(RezervacijaController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RezervacijaController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void pripremiFormu() throws Exception {
-        popuniCbMesto();
         popuniCbMusterija();
         popuniCbAutomobil();
         srediPolja();
     }
 
     private void srediPolja() {
-        frmRezervacija.getRadioPostojeci().setSelected(true);
-        frmRezervacija.getRadioNovi().setSelected(false);
         frmRezervacija.getCbMusterija().setEnabled(true);
-        frmRezervacija.getCbMesto().setEnabled(false);
-        frmRezervacija.getTxtIme().setEnabled(false);
-        frmRezervacija.getTxtPrezime().setEnabled(false);
-        frmRezervacija.getTxtAdresa().setEnabled(false);
+        AutomobilModelTabele amt = new AutomobilModelTabele(null);
+        frmRezervacija.getTabelaAutomobili().setModel(amt);
     }
 
     private void popuniCbAutomobil() throws Exception {
@@ -150,11 +135,4 @@ public class RezervacijaController {
         }
     }
 
-    private void popuniCbMesto() throws Exception {
-        frmRezervacija.getCbMesto().removeAllItems();
-        List<Mesto> mesta = Komunikacija.getInstanca().ucitajMesta();
-        for (Mesto mesto : mesta) {
-            frmRezervacija.getCbMesto().addItem(mesto);
-        }
-    }
 }

@@ -8,6 +8,7 @@ package pogledi.forme.kompoente;
 import domen.Automobil;
 import domen.Musterija;
 import domen.Rezervacija;
+import domen.StavkaRezervacije;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -18,7 +19,7 @@ import javax.swing.table.AbstractTableModel;
 public class RezervacijeModelTabele extends AbstractTableModel {
 
     List<Rezervacija> rezervacije;
-    String[] kolone = {"Datum od", "Datum do", "Musterija", "Automobil"};
+    String[] kolone = {"Datum od", "Datum do", "Musterija", "Automobili"};
 
     public RezervacijeModelTabele(List<Rezervacija> rezervacije) {
         this.rezervacije = rezervacije;
@@ -54,7 +55,11 @@ public class RezervacijeModelTabele extends AbstractTableModel {
             case 2:
                 return rezervacije.get(rowIndex).getMusterija();
             case 3:
-                return rezervacije.get(rowIndex).getAutomobil();
+                String automobili="";
+                for (StavkaRezervacije stavka : rezervacije.get(rowIndex).getAutomobili()) {
+                    automobili+=stavka.getAutomobil()+ ", ";
+                }
+                return automobili;
             default:
                 return "N/A";
         }

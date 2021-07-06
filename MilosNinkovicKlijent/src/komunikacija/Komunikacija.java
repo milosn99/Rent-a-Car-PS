@@ -12,6 +12,7 @@ import domen.Mesto;
 import domen.Model;
 import domen.Musterija;
 import domen.Rezervacija;
+import domen.StavkaRezervacije;
 import java.util.List;
 import java.io.IOException;
 import java.net.Socket;
@@ -279,6 +280,19 @@ public class Komunikacija {
         Odgovor odgovor = (Odgovor) primalac.primi();
         if (odgovor.getGreska() == null) {
             return;
+        } else {
+            throw odgovor.getGreska();
+        }
+    }
+
+    public List<StavkaRezervacije> ucitajStavke() throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_STAVKE, null);
+
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getGreska() == null) {
+            return (List<StavkaRezervacije>) odgovor.getPodatak();
         } else {
             throw odgovor.getGreska();
         }

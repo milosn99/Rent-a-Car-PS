@@ -6,6 +6,7 @@
 package pogledi.controller;
 
 import domen.Automobil;
+import domen.Korisnik;
 import domen.Marka;
 import domen.Model;
 import java.awt.event.ActionEvent;
@@ -123,7 +124,7 @@ public class AutomobilController {
                 int kubikaza = Integer.parseInt(frmAutomobil.getTxtKubikaza().getText().trim());
                 int jacinaMotora = Integer.parseInt(frmAutomobil.getTxtJacinaMotora().getText().trim());
 
-                Automobil automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model);
+                Automobil automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model, (Korisnik) Coordinator.getInstanca().vratiParam("korisnik"));
                 if (frmAutomobil.getRadioNovi().isSelected()) {
                     Komunikacija.getInstanca().ubaciAutomobilNovi(automobil);
                 } else {
@@ -176,7 +177,7 @@ public class AutomobilController {
                 int kubikaza = Integer.parseInt(frmAutomobil.getTxtKubikaza().getText().trim());
                 int jacinaMotora = Integer.parseInt(frmAutomobil.getTxtJacinaMotora().getText().trim());
 
-                Automobil automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model);
+                Automobil automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model, (Korisnik) Coordinator.getInstanca().vratiParam("korisnik"));
 
                 Komunikacija.getInstanca().izmeni(automobil);
                 Coordinator.getInstanca().dodajParam("Automobil", automobil);

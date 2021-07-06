@@ -7,6 +7,7 @@ package pogledi.forme.kompoente;
 
 import domen.Automobil;
 import domen.Musterija;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -20,7 +21,11 @@ public class AutomobilModelTabele extends AbstractTableModel {
     String[] kolone = {"Registracija", "Model", "Godiste", "Kilometraza", "Gorivo", "Potrosnja", "Cena", "Kubikaza", "Jacina motora"};
 
     public AutomobilModelTabele(List<Automobil> automobili) {
-        this.automobili = automobili;
+        if (automobili != null) {
+            this.automobili = automobili;
+        } else {
+            this.automobili = new ArrayList<>();
+        }
     }
 
     @Override
@@ -60,9 +65,9 @@ public class AutomobilModelTabele extends AbstractTableModel {
             case 6:
                 return automobili.get(rowIndex).getCena() + "EUR";
             case 7:
-                return automobili.get(rowIndex).getKubikaza()+ "cm3";
+                return automobili.get(rowIndex).getKubikaza() + "cm3";
             case 8:
-                return automobili.get(rowIndex).getJacinaMotora()+ "kW";
+                return automobili.get(rowIndex).getJacinaMotora() + "kW";
             default:
                 return "N/A";
         }
@@ -75,5 +80,10 @@ public class AutomobilModelTabele extends AbstractTableModel {
     public void izmeniElement(int i, Automobil automobil) {
         automobili.set(i, automobil);
         fireTableRowsUpdated(i, i);
+    }
+
+    public void dodajAutomobil(Automobil automobil) {
+        automobili.add(automobil);
+        fireTableDataChanged();
     }
 }

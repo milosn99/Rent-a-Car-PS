@@ -5,6 +5,7 @@
  */
 package pogledi.controller;
 
+import domen.Korisnik;
 import domen.Mesto;
 import domen.Musterija;
 import java.awt.event.ActionEvent;
@@ -65,7 +66,7 @@ public class MusterijaController {
             }
 
             private void sacuvaj() throws Exception {
-                Musterija musterija = new Musterija(Long.MIN_VALUE, frmMusterija.getTxtIme().getText(), frmMusterija.getTxtPrezime().getText(), frmMusterija.getTxtAdresa().getText(), (Mesto) frmMusterija.getCbMesto().getSelectedItem());
+                Musterija musterija = new Musterija(Long.MIN_VALUE, frmMusterija.getTxtIme().getText(), frmMusterija.getTxtPrezime().getText(), frmMusterija.getTxtAdresa().getText(), (Mesto) frmMusterija.getCbMesto().getSelectedItem(), (Korisnik) Coordinator.getInstanca().vratiParam("korisnik"));
                 Komunikacija.getInstanca().ubaci(musterija);
             }
         });

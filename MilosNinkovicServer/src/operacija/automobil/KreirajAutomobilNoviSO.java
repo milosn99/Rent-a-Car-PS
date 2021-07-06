@@ -28,7 +28,7 @@ public class KreirajAutomobilNoviSO extends ApstraktnaGenerickaOperacija{
                 || a.getGorivo().equals("") || a.getRegistracija() == null
                 || a.getRegistracija().equals("") || a.getJacinaMotora() < 0 || a.getKubikaza() < 0) {
             throw new Exception("Lose uneseni podaci");
-        };
+        }
     }
 
     @Override

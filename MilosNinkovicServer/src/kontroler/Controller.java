@@ -12,6 +12,7 @@ import domen.Mesto;
 import domen.Model;
 import domen.Musterija;
 import domen.Rezervacija;
+import domen.StavkaRezervacije;
 import java.net.Socket;
 import java.util.List;
 import niti.Server;
@@ -28,11 +29,11 @@ import operacija.musterija.KreirajMusterijuSO;
 import operacija.musterija.NadjiMusterijeSO;
 import operacija.musterija.ObradiMusterijuSO;
 import operacija.musterija.UcitajMusterijeSO;
-import operacija.rezervacija.KreirajRezervacijuNoviSO;
 import operacija.rezervacija.KreirajRezervacijuSO;
 import operacija.rezervacija.NadjiRezervacijeSO;
 import operacija.rezervacija.ObrisiRezervacijuSO;
 import operacija.rezervacija.UcitajRezervacijeSO;
+import operacija.rezervacija.UcitajStavkeSO;
 
 /**
  *
@@ -163,9 +164,10 @@ public class Controller {
         operacija.izvrsi(rezervacija, null);
     }
 
-    public void kreirajNoviRezervacija(Rezervacija rezervacija) throws Exception {
-        KreirajRezervacijuNoviSO operacija = new KreirajRezervacijuNoviSO();
-        operacija.izvrsi(rezervacija, null);
+    public List<StavkaRezervacije> ucitajStavke() throws Exception {
+        UcitajStavkeSO operacija = new UcitajStavkeSO();
+        operacija.izvrsi(null, null);
+        return operacija.getStavke();
     }
 
 }

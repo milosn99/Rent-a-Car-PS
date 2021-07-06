@@ -25,10 +25,7 @@ public class NadjiRezervacijeSO extends ApstraktnaGenerickaOperacija {
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
         rezervacije = broker.vratiPoKriterijumu((Rezervacija)param, " JOIN musterija on (rezervacija.musterijaid=musterija.musterijaid) "
-                + "JOIN mesto on (musterija.mestoid=mesto.mestoid) "
-                + "JOIN automobil on (rezervacija.registracija=automobil.registracija) "
-                + "JOIN model on (automobil.modelid=model.modelid) "
-                + "JOIN marka on (model.markaid=marka.markaid)", kljuc);
+                + "JOIN mesto on (musterija.mestoid=mesto.mestoid)", kljuc);
     }
 
     public List<Rezervacija> getRezervacije() {
