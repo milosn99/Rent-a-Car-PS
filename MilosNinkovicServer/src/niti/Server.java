@@ -44,7 +44,8 @@ public class Server extends Thread {
                 nit.start();
             }
         } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+              System.out.println("Server zatvoren");
+//            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -55,7 +56,8 @@ public class Server extends Thread {
             }
             serverSoket.close();
         } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("");
         }
     }
 

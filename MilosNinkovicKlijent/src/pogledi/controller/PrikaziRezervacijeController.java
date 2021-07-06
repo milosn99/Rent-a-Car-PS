@@ -41,7 +41,7 @@ public class PrikaziRezervacijeController {
             pripremiFormu();
             frmPR.setVisible(true);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(frmPR, ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frmPR, "Sistem ne moze da otvori formu", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -54,11 +54,11 @@ public class PrikaziRezervacijeController {
                     Date datumOd = frmPR.getDcDatumOd().getDate();
                     Date datumDo = frmPR.getDcDatumDo().getDate();
                     if (datumOd != null && datumDo != null) {
-                        uslov += "datumOd > '" + new java.sql.Date(datumOd.getTime()) + "' AND datumDo < '" + new java.sql.Date(datumDo.getTime()) + "'";
+                        uslov += "datumOd >= '" + new java.sql.Date(datumOd.getTime()) + "' AND datumDo <= '" + new java.sql.Date(datumDo.getTime()) + "'";
                     } else if (datumOd != null && datumDo == null) {
-                        uslov += "datumOd>'" + new java.sql.Date(datumOd.getTime()) + "'";
+                        uslov += "datumOd>='" + new java.sql.Date(datumOd.getTime()) + "'";
                     } else if (datumOd == null && datumDo != null) {
-                        uslov += "datumDo<'" + new java.sql.Date(datumDo.getTime()) + "'";
+                        uslov += "datumDo<='" + new java.sql.Date(datumDo.getTime()) + "'";
                     }
                     List<Rezervacija> rezervacija = Komunikacija.getInstanca().vratiRezervacijePoUslovu(uslov);
                     JOptionPane.showMessageDialog(frmPR, "Sistem je uspeo da nađe rezervacije po zadatim kriterijumima", "Uspeh", JOptionPane.INFORMATION_MESSAGE);

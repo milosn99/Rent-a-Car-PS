@@ -31,14 +31,6 @@ public class KreirajRezervacijuSO extends ApstraktnaGenerickaOperacija {
         if (r.getAutomobili().isEmpty()) {
             throw new Exception("Prazna lista auta");
         }
-    }
-
-    @Override
-    protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
-        Rezervacija r = (Rezervacija) param;
-
-        broker.ubaci((Rezervacija) param);
-
         String uslov = " (rezervacija.datumOd BETWEEN '" + new java.sql.Date(r.getDatumOd().getTime())
                 + "' AND '" + new java.sql.Date(r.getDatumDo().getTime()) + "') OR (rezervacija.datumDo BETWEEN '"
                 + new java.sql.Date(r.getDatumDo().getTime())
@@ -53,14 +45,21 @@ public class KreirajRezervacijuSO extends ApstraktnaGenerickaOperacija {
                 + "JOIN automobil on (stavkarezervacije.registracija=automobil.registracija) "
                 + "JOIN model on (automobil.modelid=model.modelid) "
                 + "JOIN marka on (model.markaid=marka.markaid) ", uslov);
-        
+
         for (StavkaRezervacije stavka : stavke) {
             for (StavkaRezervacije stavkaRezervacije : r.getAutomobili()) {
-                if(stavka.getAutomobil().equals(stavkaRezervacije.getAutomobil())){
+                if (stavka.getAutomobil().equals(stavkaRezervacije.getAutomobil())) {
                     throw new Exception("Zauzet auto");
                 }
             }
         }
+    }
+
+    @Override
+    protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
+        Rezervacija r = (Rezervacija) param;
+
+        broker.ubaci((Rezervacija) param);
 
         List<Rezervacija> rezervacije = broker.vratiSve(new Rezervacija(), " JOIN musterija on (rezervacija.musterijaid=musterija.musterijaid) "
                 + "JOIN mesto on (musterija.mestoid=mesto.mestoid) ");

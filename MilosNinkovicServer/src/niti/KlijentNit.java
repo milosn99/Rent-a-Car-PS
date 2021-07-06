@@ -162,7 +162,7 @@ public class KlijentNit extends Thread {
                             break;
                     }
                 } catch (Exception e) {
-                    System.out.println("Desila se greska");
+//                    System.out.println("Desila se greska");
                     odgovor.setGreska(e);
                 }
                 posiljalac.posalji(odgovor);
@@ -177,7 +177,7 @@ public class KlijentNit extends Thread {
             soket.close();
             interrupt();
         } catch (IOException ex) {
-            Logger.getLogger(KlijentNit.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(KlijentNit.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

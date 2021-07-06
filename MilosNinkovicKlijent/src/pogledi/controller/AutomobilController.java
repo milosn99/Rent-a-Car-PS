@@ -36,8 +36,12 @@ public class AutomobilController {
     }
 
     public void otvoriFormu(FormaMod frmMod) {
-        pripremiFormu(frmMod);
-        frmAutomobil.setVisible(true);
+        try {
+            pripremiFormu(frmMod);
+            frmAutomobil.setVisible(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(frmAutomobil, "Sistem nije uspeo da otvori formu", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void addActionListener() {
@@ -186,15 +190,11 @@ public class AutomobilController {
         });
     }
 
-    private void pripremiFormu(FormaMod formaMod) {
-        try {
+    private void pripremiFormu(FormaMod formaMod) throws Exception {
+        popuniCbModel();
+        popuniCbMarka();
+        pripremiMod(formaMod);
 
-            popuniCbModel();
-            popuniCbMarka();
-            pripremiMod(formaMod);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(frmAutomobil, ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     private void popuniCbModel() throws Exception {

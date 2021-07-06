@@ -26,7 +26,7 @@ public class FormaBaza extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-
+        pripremiFormu();
     }
 
     /**
@@ -110,18 +110,16 @@ public class FormaBaza extends javax.swing.JDialog {
         String dbPassword = txtSifra.getText().trim();
 
         try {
-            Connection konekcija = DriverManager.getConnection(url, dbUser, dbPassword);
             Konfiguracija.getInstanca().setProperty("url", url);
             Konfiguracija.getInstanca().setProperty("user", dbUser);
             Konfiguracija.getInstanca().setProperty("password", dbPassword);
 
             Konfiguracija.getInstanca().sacuvajIzmene();
             JOptionPane.showMessageDialog(this, "Parametri su sacuvani!", "Info", JOptionPane.INFORMATION_MESSAGE);
-            konekcija.close();
             dispose();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Ne moze se uspostaviti konekcija sa ovim parametrima!", "Greska", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(FormaBaza.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Greska pri promeni podataka", "Greska", JOptionPane.ERROR_MESSAGE);
+//            Logger.getLogger(FormaBaza.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnSacuvajActionPerformed
@@ -177,4 +175,10 @@ public class FormaBaza extends javax.swing.JDialog {
     private javax.swing.JTextField txtSifra;
     private javax.swing.JTextField txtURL;
     // End of variables declaration//GEN-END:variables
+
+    private void pripremiFormu() {
+        txtKorisnickoIme.setText(Konfiguracija.getInstanca().getProperty("user"));
+        txtSifra.setText(Konfiguracija.getInstanca().getProperty("pass"));
+        txtURL.setText(Konfiguracija.getInstanca().getProperty("url"));
+    }
 }

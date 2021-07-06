@@ -25,7 +25,6 @@ public class RepozitorijumDBGenericki implements DBRepozitorijum<ApstraktniDomen
         if (join != null) {
             upit += join;
         }
-        System.out.println(upit);
         Connection konekcija = Konekcija.getInstanca().getKonekcija();
         Statement st = konekcija.createStatement();
         ResultSet rs = st.executeQuery(upit);
@@ -46,7 +45,6 @@ public class RepozitorijumDBGenericki implements DBRepozitorijum<ApstraktniDomen
         if (!uslov.isBlank()) {
             upit += " WHERE " + uslov;
         }
-        System.out.println(upit);
         Connection konekcija = Konekcija.getInstanca().getKonekcija();
         Statement st = konekcija.createStatement();
         ResultSet rs = st.executeQuery(upit);
@@ -65,7 +63,7 @@ public class RepozitorijumDBGenericki implements DBRepozitorijum<ApstraktniDomen
             upit += join;
         }
         upit += " WHERE " + ado.vratiPrimarniKljuc();
-        System.out.println(upit);
+
 
         Connection konekcija = Konekcija.getInstanca().getKonekcija();
 
@@ -81,7 +79,7 @@ public class RepozitorijumDBGenericki implements DBRepozitorijum<ApstraktniDomen
 
     public void ubaci(ApstraktniDomenskiObjekat ado) throws Exception {
         String upit = "INSERT INTO " + ado.vratiNazivTabele() + "(" + ado.vratiKoloneZaUbacivanje() + ") VALUES(" + ado.vratiVrednostiZaUbacivanje() + ")";
-        System.out.println(upit);
+
         Connection konekcija = Konekcija.getInstanca().getKonekcija();
         Statement st = konekcija.createStatement();
         st.executeUpdate(upit);
@@ -90,7 +88,7 @@ public class RepozitorijumDBGenericki implements DBRepozitorijum<ApstraktniDomen
 
     public void obrisi(ApstraktniDomenskiObjekat ado) throws Exception {
         String upit = "DELETE FROM " + ado.vratiNazivTabele() + " WHERE " + ado.vratiPrimarniKljuc();
-        System.out.println(upit);
+
         Connection konekcija = Konekcija.getInstanca().getKonekcija();
         Statement st = konekcija.createStatement();
         st.executeUpdate(upit);
@@ -99,7 +97,7 @@ public class RepozitorijumDBGenericki implements DBRepozitorijum<ApstraktniDomen
 
     public void izmeni(ApstraktniDomenskiObjekat ado) throws Exception {
         String upit = "UPDATE " + ado.vratiNazivTabele() + " SET " + ado.vratiVrednostiZaIzmenu() + " WHERE " + ado.vratiPrimarniKljuc();
-        System.out.println(upit);
+
         Connection konekcija = Konekcija.getInstanca().getKonekcija();
         Statement st = konekcija.createStatement();
         st.executeUpdate(upit);

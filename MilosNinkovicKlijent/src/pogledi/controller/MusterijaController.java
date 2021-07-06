@@ -35,8 +35,12 @@ public class MusterijaController {
     }
 
     public void otvoriFormu(FormaMod formaMod) {
-        pripremiFormu(formaMod);
-        frmMusterija.setVisible(true);
+        try {
+            pripremiFormu(formaMod);
+            frmMusterija.setVisible(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(frmMusterija, "Sistem nije uspeo da otvori formu", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
 
     }
 
@@ -110,13 +114,10 @@ public class MusterijaController {
         });
     }
 
-    private void pripremiFormu(FormaMod formaMod) {
-        try {
-            popuniCbMesto();
-            pripremiMod(formaMod);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(frmMusterija, "Greska prilikom ucitavanja mesta", "Greska", JOptionPane.ERROR_MESSAGE);
-        }
+    private void pripremiFormu(FormaMod formaMod) throws Exception {
+        popuniCbMesto();
+        pripremiMod(formaMod);
+
     }
 
     private void popuniCbMesto() throws Exception {

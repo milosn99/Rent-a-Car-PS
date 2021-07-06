@@ -74,40 +74,40 @@ public class RezervacijaController {
                     stavke.add(new StavkaRezervacije(rezervacija, automobil));
                 }
                 if (stavke.isEmpty()) {
-                        throw new Exception("Prazna lista auta");
-                    }
-                    rezervacija.setAutomobili(stavke);
-                    return rezervacija;
+                    throw new Exception("Prazna lista auta");
                 }
-
+                rezervacija.setAutomobili(stavke);
+                return rezervacija;
             }
-            );
 
-            frmRezervacija.addBtnDodajActionListener ( 
+        }
+        );
+
+        frmRezervacija.addBtnDodajActionListener(
                 new ActionListener() {
             @Override
-                public void actionPerformed
-                (ActionEvent e
-                
-                    ) {
+            public void actionPerformed(ActionEvent e
+            ) {
                 AutomobilModelTabele amt = (AutomobilModelTabele) frmRezervacija.getTabelaAutomobili().getModel();
-                    if (amt.getAutomobili().contains((Automobil) frmRezervacija.getCbAutomobil().getSelectedItem())) {
-                        JOptionPane.showMessageDialog(frmRezervacija, "Automobil je vec u listi", "Greska", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-                    amt.dodajAutomobil((Automobil) frmRezervacija.getCbAutomobil().getSelectedItem());
-                    frmRezervacija.getTabelaAutomobili().setModel(amt);
+                if (amt.getAutomobili().contains((Automobil) frmRezervacija.getCbAutomobil().getSelectedItem())) {
+                    JOptionPane.showMessageDialog(frmRezervacija, "Automobil je vec u listi", "Greska", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
-        });
+                amt.dodajAutomobil((Automobil) frmRezervacija.getCbAutomobil().getSelectedItem());
+                frmRezervacija.getTabelaAutomobili().setModel(amt);
             }
+        });
+    }
 
     public void otvoriFormu() {
         try {
             pripremiFormu();
             frmRezervacija.setVisible(true);
         } catch (Exception ex) {
-            Logger.getLogger(RezervacijaController.class
-                    .getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(RezervacijaController.class
+//                    .getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(frmRezervacija, "Sistem ne moze da otvori formu", "Greska", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 

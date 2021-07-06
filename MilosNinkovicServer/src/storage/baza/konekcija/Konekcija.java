@@ -35,9 +35,8 @@ public class Konekcija {
             String url = Konfiguracija.getInstanca().getProperty("url");
             String user = Konfiguracija.getInstanca().getProperty("user");
             String pass = Konfiguracija.getInstanca().getProperty("password");
-            System.out.println(pass);
+
             konekcija = DriverManager.getConnection(url, user, pass);
-            System.out.println("Uspostavljena konekcija sa bazom podataka");
             konekcija.setAutoCommit(false);
         }
         return konekcija;

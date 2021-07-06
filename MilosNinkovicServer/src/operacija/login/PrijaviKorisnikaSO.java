@@ -24,7 +24,6 @@ public class PrijaviKorisnikaSO extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
-//        System.out.println("dosao do izvrsiOperaciju");
         List<Korisnik> korisnici = broker.vratiSve((Korisnik) param, null);
         Korisnik k = (Korisnik) param;
         if (korisnici.contains(k)) {
