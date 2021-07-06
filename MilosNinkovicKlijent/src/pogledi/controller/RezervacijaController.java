@@ -74,28 +74,32 @@ public class RezervacijaController {
                     stavke.add(new StavkaRezervacije(rezervacija, automobil));
                 }
                 if (stavke.isEmpty()) {
-                    throw new Exception("Prazna lista auta");
+                        throw new Exception("Prazna lista auta");
+                    }
+                    rezervacija.setAutomobili(stavke);
+                    return rezervacija;
                 }
-                rezervacija.setAutomobili(stavke);
-                return rezervacija;
+
             }
+            );
 
-        }
-        );
-
-        frmRezervacija.addBtnDodajActionListener(new ActionListener() {
+            frmRezervacija.addBtnDodajActionListener ( 
+                new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+                public void actionPerformed
+                (ActionEvent e
+                
+                    ) {
                 AutomobilModelTabele amt = (AutomobilModelTabele) frmRezervacija.getTabelaAutomobili().getModel();
-                if (amt.getAutomobili().contains((Automobil) frmRezervacija.getCbAutomobil().getSelectedItem())) {
-                    JOptionPane.showMessageDialog(frmRezervacija, "Automobil je vec u listi", "Greska", JOptionPane.ERROR_MESSAGE);
-                    return;
+                    if (amt.getAutomobili().contains((Automobil) frmRezervacija.getCbAutomobil().getSelectedItem())) {
+                        JOptionPane.showMessageDialog(frmRezervacija, "Automobil je vec u listi", "Greska", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    amt.dodajAutomobil((Automobil) frmRezervacija.getCbAutomobil().getSelectedItem());
+                    frmRezervacija.getTabelaAutomobili().setModel(amt);
                 }
-                amt.dodajAutomobil((Automobil) frmRezervacija.getCbAutomobil().getSelectedItem());
-                frmRezervacija.getTabelaAutomobili().setModel(amt);
-            }
         });
-    }
+            }
 
     public void otvoriFormu() {
         try {
