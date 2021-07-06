@@ -7,6 +7,7 @@ package operacija.rezervacija;
 
 import domen.Model;
 import domen.Rezervacija;
+import domen.StavkaRezervacije;
 import java.util.List;
 import operacija.ApstraktnaGenerickaOperacija;
 
@@ -24,32 +25,57 @@ public class KreirajRezervacijuSO extends ApstraktnaGenerickaOperacija {
 
         Rezervacija r = (Rezervacija) param;
 
-        if (r.getAutomobil() == null || r.getMusterija() == null || r.getDatumDo() == null || r.getDatumOd() == null || r.getDatumOd().after(r.getDatumDo())) {
+        if (r.getMusterija() == null || r.getDatumDo() == null || r.getDatumOd() == null || r.getDatumOd().after(r.getDatumDo())) {
             throw new Exception("Losi podaci");
+        }
+        if (r.getAutomobili().isEmpty()) {
+            throw new Exception("Prazna lista auta");
         }
     }
 
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
         Rezervacija r = (Rezervacija) param;
-        String uslov = " (datumOd BETWEEN '" + new java.sql.Date(r.getDatumOd().getTime()) 
-                + "' AND '" + new java.sql.Date(r.getDatumDo().getTime()) + "') OR (datumDo BETWEEN '"
-                + new java.sql.Date(r.getDatumDo().getTime()) 
-                + "' AND '" + new java.sql.Date(r.getDatumOd().getTime()) + "') OR ('" 
-                + new java.sql.Date(r.getDatumOd().getTime()) + "' BETWEEN datumOd AND datumDo) OR ('"
-                + new java.sql.Date(r.getDatumDo().getTime()) +"' BETWEEN datumOd AND datumDo)";
-        
-        List<Rezervacija > rezervacije = broker.vratiPoKriterijumu((Rezervacija) param, " JOIN musterija on (rezervacija.musterijaid=musterija.musterijaid) "
-                + "JOIN mesto on (musterija.mestoid=mesto.mestoid) "
-                + "JOIN automobil on (rezervacija.registracija=automobil.registracija) "
-                + "JOIN model on (automobil.modelid=model.modelid) "
-                + "JOIN marka on (model.markaid=marka.markaid)", uslov);
-        
-        for (Rezervacija rezervacija : rezervacije) {
-            if(rezervacija.getAutomobil().equals(r.getAutomobil()))
-                throw new Exception("Izabrani automobil nije slobodan u tom periodu");
-        }
 
         broker.ubaci((Rezervacija) param);
+
+        String uslov = " (rezervacija.datumOd BETWEEN '" + new java.sql.Date(r.getDatumOd().getTime())
+                + "' AND '" + new java.sql.Date(r.getDatumDo().getTime()) + "') OR (rezervacija.datumDo BETWEEN '"
+                + new java.sql.Date(r.getDatumDo().getTime())
+                + "' AND '" + new java.sql.Date(r.getDatumOd().getTime()) + "') OR ('"
+                + new java.sql.Date(r.getDatumOd().getTime()) + "' BETWEEN rezervacija.datumOd AND rezervacija.datumDo) OR ('"
+                + new java.sql.Date(r.getDatumDo().getTime()) + "' BETWEEN rezervacija.datumOd AND rezervacija.datumDo)";
+
+        List<StavkaRezervacije> stavke = broker.vratiPoKriterijumu(new StavkaRezervacije(), ""
+                + " JOIN rezervacija ON (stavkarezervacije.rezervacijaid = rezervacija.rezervacijaid) "
+                + "JOIN musterija on (rezervacija.musterijaid=musterija.musterijaid) "
+                + "JOIN mesto on (musterija.mestoid=mesto.mestoid) "
+                + "JOIN automobil on (stavkarezervacije.registracija=automobil.registracija) "
+                + "JOIN model on (automobil.modelid=model.modelid) "
+                + "JOIN marka on (model.markaid=marka.markaid) ", uslov);
+        
+        for (StavkaRezervacije stavka : stavke) {
+            for (StavkaRezervacije stavkaRezervacije : r.getAutomobili()) {
+                if(stavka.getAutomobil().equals(stavkaRezervacije.getAutomobil())){
+                    throw new Exception("Zauzet auto");
+                }
+            }
+        }
+
+        List<Rezervacija> rezervacije = broker.vratiSve(new Rezervacija(), " JOIN musterija on (rezervacija.musterijaid=musterija.musterijaid) "
+                + "JOIN mesto on (musterija.mestoid=mesto.mestoid) ");
+        Rezervacija r2 = rezervacije.get(0);
+        for (Rezervacija r1 : rezervacije) {
+            if (r1.getRezervacijaId() > r2.getRezervacijaId()) {
+                r2 = r1;
+            }
+        }
+
+        List<StavkaRezervacije> stavkeRez = ((Rezervacija) param).getAutomobili();
+        for (StavkaRezervacije stavkaRezervacije : stavkeRez) {
+            stavkaRezervacije.setRezervacija(r2);
+            broker.ubaci(stavkaRezervacije);
+        }
+
     }
 }

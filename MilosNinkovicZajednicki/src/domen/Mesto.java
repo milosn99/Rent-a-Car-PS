@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -20,6 +21,30 @@ public class Mesto implements ApstraktniDomenskiObjekat {
     private String naziv;
 
     public Mesto() {
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Mesto other = (Mesto) obj;
+        if (!Objects.equals(this.mestoId, other.mestoId)) {
+            return false;
+        }
+        return true;
     }
 
     public Mesto(Long mestoId, String naziv) {

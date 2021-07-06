@@ -40,6 +40,7 @@ public class FormaPrikaziMusterije extends javax.swing.JDialog {
         cbMesto = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         txtIme = new javax.swing.JTextField();
+        checkMesto = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -97,15 +98,19 @@ public class FormaPrikaziMusterije extends javax.swing.JDialog {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPrezime, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                                    .addComponent(cbMesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(txtPrezime)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cbMesto, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(checkMesto)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addGap(18, 18, 18)
-                        .addComponent(btnPretrazi, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                        .addComponent(btnPretrazi, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                         .addGap(245, 245, 245))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnIzmeni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnIzmeni, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -125,7 +130,8 @@ public class FormaPrikaziMusterije extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMesto1)
-                    .addComponent(cbMesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbMesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkMesto))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,6 +158,7 @@ public class FormaPrikaziMusterije extends javax.swing.JDialog {
     private javax.swing.JButton btnIzmeni;
     private javax.swing.JButton btnPretrazi;
     private javax.swing.JComboBox cbMesto;
+    private javax.swing.JCheckBox checkMesto;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
@@ -191,5 +198,13 @@ public class FormaPrikaziMusterije extends javax.swing.JDialog {
 
     public void addBtnIzmeniActionListener(ActionListener actionListener) {
         btnIzmeni.addActionListener(actionListener);
+    }
+
+    public void addCheckMestoActionListener(ActionListener actionListener) {
+        checkMesto.addActionListener(actionListener);
+    }
+
+    public javax.swing.JCheckBox getCheckMesto() {
+        return checkMesto;
     }
 }

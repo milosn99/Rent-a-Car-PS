@@ -27,6 +27,7 @@ public class Automobil implements ApstraktniDomenskiObjekat {
     private int kubikaza;
     private int jacinaMotora;
     private Model model;
+    private Korisnik korisnik;
 
     public Automobil() {
     }
@@ -36,7 +37,7 @@ public class Automobil implements ApstraktniDomenskiObjekat {
         return model + " (" + godiste+". god, "+cena+" EUR "+ gorivo + ", tablice: " + registracija+")";
     }
 
-    public Automobil(String registracija, int godiste, int cena, int kilometraza, BigDecimal potrosnja, String gorivo, int kubikaza, int jacinaMotora, Model model) {
+    public Automobil(String registracija, int godiste, int cena, int kilometraza, BigDecimal potrosnja, String gorivo, int kubikaza, int jacinaMotora, Model model, Korisnik korisnik) {
         this.registracija = registracija;
         this.godiste = godiste;
         this.cena = cena;
@@ -46,7 +47,9 @@ public class Automobil implements ApstraktniDomenskiObjekat {
         this.kubikaza = kubikaza;
         this.jacinaMotora = jacinaMotora;
         this.model = model;
+        this.korisnik = korisnik;
     }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -94,8 +97,11 @@ public class Automobil implements ApstraktniDomenskiObjekat {
             int kilometraza = rs.getInt("automobil.kilometraza");
             BigDecimal potrosnja = rs.getBigDecimal("automobil.potrosnja");
             int cena = rs.getInt("automobil.cena");
-
-            Automobil automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model);
+            
+            String korisnickoIme = rs.getString("automobil.korisnik");
+            Korisnik korisnik = new Korisnik();
+            korisnik.setKorisnickoIme(korisnickoIme);
+            Automobil automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model, korisnik);
             lista.add(automobil);
         }
         return lista;
@@ -103,12 +109,12 @@ public class Automobil implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        return "registracija,modelid,godiste,kilometraza,potrosnja,cena,gorivo,kubikaza,jacinamotora";
+        return "registracija,modelid,godiste,kilometraza,potrosnja,cena,gorivo,kubikaza,jacinamotora,korisnik";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        return "'"+registracija+"', " + model.getModelId() + ", " + godiste + ", " + kilometraza + "," + potrosnja + ", " + cena + ", '"+gorivo+"', "+kubikaza+", "+jacinaMotora;
+        return "'"+registracija+"', " + model.getModelId() + ", " + godiste + ", " + kilometraza + "," + potrosnja + ", " + cena + ", '"+gorivo+"', "+kubikaza+", "+jacinaMotora+",'"+korisnik.getKorisnickoIme()+"'";
     }
 
     @Override
@@ -146,7 +152,11 @@ public class Automobil implements ApstraktniDomenskiObjekat {
             BigDecimal potrosnja = rs.getBigDecimal("automobil.potrosnja");
             int cena = rs.getInt("automobil.cena");
 
-            automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model);
+            
+            String korisnickoIme = rs.getString("automobil.korisnik");
+            Korisnik korisnik = new Korisnik();
+            korisnik.setKorisnickoIme(korisnickoIme);
+            automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model, korisnik);
 
         }
         return automobil;
@@ -222,6 +232,14 @@ public class Automobil implements ApstraktniDomenskiObjekat {
 
     public void setModel(Model model) {
         this.model = model;
+    }
+
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
     }
 
 }

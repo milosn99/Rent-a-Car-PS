@@ -53,6 +53,7 @@ public class FormaPrikaziAutomobile extends javax.swing.JDialog {
         txtCenaOd = new javax.swing.JTextField();
         txtCenaDo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        checkModel = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -145,7 +146,6 @@ public class FormaPrikaziAutomobile extends javax.swing.JDialog {
                                     .addComponent(jLabel6))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbModel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
@@ -164,9 +164,13 @@ public class FormaPrikaziAutomobile extends javax.swing.JDialog {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtKmDo)
                                             .addComponent(txtGodisteDo)
-                                            .addComponent(txtCenaDo))))))
+                                            .addComponent(txtCenaDo)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cbModel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(checkModel)))))
                         .addGap(18, 18, 18)
-                        .addComponent(btnPretrazi, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                        .addComponent(btnPretrazi, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                         .addGap(255, 255, 255))))
         );
         layout.setVerticalGroup(
@@ -181,7 +185,8 @@ public class FormaPrikaziAutomobile extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblMesto1)
-                            .addComponent(cbModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(checkModel)))
                     .addComponent(btnPretrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -239,6 +244,7 @@ public class FormaPrikaziAutomobile extends javax.swing.JDialog {
     private javax.swing.JButton btnIzmeni;
     private javax.swing.JButton btnPretrazi;
     private javax.swing.JComboBox cbModel;
+    private javax.swing.JCheckBox checkModel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -302,12 +308,19 @@ public class FormaPrikaziAutomobile extends javax.swing.JDialog {
         return txtRegistracija;
     }
 
-
     public void addBtnPretraziActionListener(ActionListener actionListener) {
         btnPretrazi.addActionListener(actionListener);
     }
 
     public void addBtnIzmeniActionListener(ActionListener actionListener) {
         btnIzmeni.addActionListener(actionListener);
+    }
+
+    public void addCheckModelActionListener(ActionListener actionListener) {
+        checkModel.addActionListener(actionListener);
+    }
+
+    public javax.swing.JCheckBox getCheckModel() {
+        return checkModel;
     }
 }

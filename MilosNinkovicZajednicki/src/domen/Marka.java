@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -59,6 +60,30 @@ public class Marka implements ApstraktniDomenskiObjekat {
             lista.add(marka);
         }
         return lista;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Marka other = (Marka) obj;
+        if (!Objects.equals(this.markaId, other.markaId)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

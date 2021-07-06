@@ -21,6 +21,7 @@ public class Musterija implements ApstraktniDomenskiObjekat {
     private String prezime;
     private String adresa;
     private Mesto mesto;
+    private Korisnik korisnik;
 
     public Musterija() {
     }
@@ -30,12 +31,13 @@ public class Musterija implements ApstraktniDomenskiObjekat {
         return ime + " " + prezime + " " + mesto;
     }
 
-    public Musterija(Long musterijaId, String ime, String prezime, String adresa, Mesto mesto) {
+    public Musterija(Long musterijaId, String ime, String prezime, String adresa, Mesto mesto, Korisnik korisnik) {
         this.musterijaId = musterijaId;
         this.ime = ime;
         this.prezime = prezime;
         this.adresa = adresa;
         this.mesto = mesto;
+        this.korisnik = korisnik;
     }
 
     public Mesto getMesto() {
@@ -95,7 +97,12 @@ public class Musterija implements ApstraktniDomenskiObjekat {
             String ime = rs.getString("musterija.ime");
             String prezime = rs.getString("musterija.prezime");
             String adresa = rs.getString("musterija.adresa");
-            Musterija musterija = new Musterija(musterijaId, ime, prezime, adresa, mesto);
+
+            String korisnickoIme = rs.getString("musterija.korisnik");
+            Korisnik korisnik = new Korisnik();
+            korisnik.setKorisnickoIme(korisnickoIme);
+
+            Musterija musterija = new Musterija(musterijaId, ime, prezime, adresa, mesto, korisnik);
             lista.add(musterija);
         }
         return lista;
@@ -103,12 +110,12 @@ public class Musterija implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        return "ime,prezime,adresa,mestoid";
+        return "ime,prezime,adresa,mestoid,korisnik";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        return "'" + ime + "','" + prezime + "','" + adresa + "'," + mesto.getMestoId();
+        return "'" + ime + "','" + prezime + "','" + adresa + "'," + mesto.getMestoId()+",'" + korisnik.getKorisnickoIme()+"'";
     }
 
     @Override
@@ -128,8 +135,11 @@ public class Musterija implements ApstraktniDomenskiObjekat {
             String ime = rs.getString("musterija.ime");
             String prezime = rs.getString("musterija.prezime");
             String adresa = rs.getString("musterija.adresa");
-            musterija = new Musterija(musterijaId, ime, prezime, adresa, mesto);
+            String korisnickoIme = rs.getString("musterija.korisnik");
+            Korisnik korisnik = new Korisnik();
+            korisnik.setKorisnickoIme(korisnickoIme);
 
+            musterija = new Musterija(musterijaId, ime, prezime, adresa, mesto, korisnik);
         }
         return musterija;
     }
@@ -137,6 +147,14 @@ public class Musterija implements ApstraktniDomenskiObjekat {
     @Override
     public String vratiVrednostiZaIzmenu() {
         return "ime='" + ime + "',prezime='" + prezime + "',adresa='" + adresa + "',mestoid=" + mesto.getMestoId();
+    }
+
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
     }
 
 }

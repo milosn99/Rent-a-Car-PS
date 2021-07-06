@@ -17,7 +17,7 @@ import storage.baza.konekcija.Konekcija;
  *
  * @author milos
  */
-public class RepozitorijumDBGenericki implements DBRepozitorijum<ApstraktniDomenskiObjekat>{
+public class RepozitorijumDBGenericki implements DBRepozitorijum<ApstraktniDomenskiObjekat> {
 
     public List<ApstraktniDomenskiObjekat> vratiSve(ApstraktniDomenskiObjekat ado, String join) throws Exception {
         List<ApstraktniDomenskiObjekat> lista = null;
@@ -43,7 +43,9 @@ public class RepozitorijumDBGenericki implements DBRepozitorijum<ApstraktniDomen
         if (join != null) {
             upit += join;
         }
-        upit += " WHERE " + uslov;
+        if (!uslov.isBlank()) {
+            upit += " WHERE " + uslov;
+        }
         System.out.println(upit);
         Connection konekcija = Konekcija.getInstanca().getKonekcija();
         Statement st = konekcija.createStatement();
@@ -64,6 +66,7 @@ public class RepozitorijumDBGenericki implements DBRepozitorijum<ApstraktniDomen
         }
         upit += " WHERE " + ado.vratiPrimarniKljuc();
         System.out.println(upit);
+
         Connection konekcija = Konekcija.getInstanca().getKonekcija();
 
         Statement st = konekcija.createStatement();

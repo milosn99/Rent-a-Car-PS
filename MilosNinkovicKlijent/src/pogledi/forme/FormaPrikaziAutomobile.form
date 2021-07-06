@@ -48,7 +48,6 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cbModel" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
@@ -74,11 +73,16 @@
                                           <Component id="txtCenaDo" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="cbModel" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="checkModel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnPretrazi" pref="264" max="32767" attributes="0"/>
+                      <Component id="btnPretrazi" pref="303" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="255" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -99,6 +103,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblMesto1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cbModel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkModel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="btnPretrazi" min="-2" pref="50" max="-2" attributes="0"/>
@@ -250,6 +255,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cena do:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="checkModel">
     </Component>
   </SubComponents>
 </Form>

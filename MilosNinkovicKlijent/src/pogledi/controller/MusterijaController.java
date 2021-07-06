@@ -5,7 +5,9 @@
  */
 package pogledi.controller;
 
+import domen.Korisnik;
 import domen.Mesto;
+import domen.Model;
 import domen.Musterija;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -65,7 +67,7 @@ public class MusterijaController {
             }
 
             private void sacuvaj() throws Exception {
-                Musterija musterija = new Musterija(Long.MIN_VALUE, frmMusterija.getTxtIme().getText(), frmMusterija.getTxtPrezime().getText(), frmMusterija.getTxtAdresa().getText(), (Mesto) frmMusterija.getCbMesto().getSelectedItem());
+                Musterija musterija = new Musterija(Long.MIN_VALUE, frmMusterija.getTxtIme().getText(), frmMusterija.getTxtPrezime().getText(), frmMusterija.getTxtAdresa().getText(), (Mesto) frmMusterija.getCbMesto().getSelectedItem(), (Korisnik) Coordinator.getInstanca().vratiParam("korisnik"));
                 Komunikacija.getInstanca().ubaci(musterija);
             }
         });
@@ -110,8 +112,8 @@ public class MusterijaController {
 
     private void pripremiFormu(FormaMod formaMod) {
         try {
-            pripremiMod(formaMod);
             popuniCbMesto();
+            pripremiMod(formaMod);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(frmMusterija, "Greska prilikom ucitavanja mesta", "Greska", JOptionPane.ERROR_MESSAGE);
         }
@@ -143,7 +145,17 @@ public class MusterijaController {
                 frmMusterija.getTxtIme().setText(m.getIme());
                 frmMusterija.getTxtPrezime().setText(m.getPrezime());
                 frmMusterija.getTxtAdresa().setText(m.getAdresa());
-                frmMusterija.getCbMesto().setSelectedItem(m.getMesto());
+
+                Mesto mesto = null;
+                for (int i = 0; i < frmMusterija.getCbMesto().getItemCount(); i++) {
+                    mesto = (Mesto) frmMusterija.getCbMesto().getItemAt(i);
+                    if (mesto.equals(m.getMesto())) {
+                        frmMusterija.getCbMesto().setSelectedItem(mesto);
+                    }
+
+                }
+
+//                frmMusterija.getCbMesto().setSelectedItem(m.getMesto());
                 break;
         }
     }

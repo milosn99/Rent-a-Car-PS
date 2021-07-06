@@ -6,6 +6,7 @@
 package pogledi.forme;
 
 import java.awt.event.ActionListener;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -19,8 +20,6 @@ public class FormaRezervacija extends javax.swing.JDialog {
     public FormaRezervacija(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        radioGrupa.add(radioNovi);
-        radioGrupa.add(radioPostojeci);
     }
 
     /**
@@ -38,21 +37,13 @@ public class FormaRezervacija extends javax.swing.JDialog {
         dcDatumOd = new com.toedter.calendar.JDateChooser();
         panelPostojeca = new javax.swing.JPanel();
         cbMusterija = new javax.swing.JComboBox();
-        radioPostojeci = new javax.swing.JRadioButton();
         dcDatumDo = new com.toedter.calendar.JDateChooser();
-        radioNovi = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        panelNova = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        txtIme = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtPrezime = new javax.swing.JTextField();
-        cbMesto = new javax.swing.JComboBox();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtAdresa = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         cbAutomobil = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaAutomobili = new javax.swing.JTable();
+        btnDodaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -80,68 +71,25 @@ public class FormaRezervacija extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        radioPostojeci.setText("Postojeca musterija");
-
-        radioNovi.setText("Nova musterija");
-
         jLabel1.setText("Datum od:");
 
-        panelNova.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        jLabel4.setText("Ime:");
-
-        jLabel5.setText("Prezime:");
-
-        jLabel6.setText("Mesto:");
-
-        jLabel7.setText("Adresa:");
-
-        javax.swing.GroupLayout panelNovaLayout = new javax.swing.GroupLayout(panelNova);
-        panelNova.setLayout(panelNovaLayout);
-        panelNovaLayout.setHorizontalGroup(
-            panelNovaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelNovaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelNovaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelNovaLayout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(txtIme))
-                    .addGroup(panelNovaLayout.createSequentialGroup()
-                        .addGroup(panelNovaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(26, 26, 26)
-                        .addGroup(panelNovaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbMesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtPrezime)
-                            .addComponent(txtAdresa))))
-                .addContainerGap())
-        );
-        panelNovaLayout.setVerticalGroup(
-            panelNovaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelNovaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelNovaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtIme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelNovaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelNovaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbMesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelNovaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAdresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         jLabel2.setText("Datum do:");
+
+        tabelaAutomobili.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tabelaAutomobili);
+
+        btnDodaj.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnDodaj.setText("Dodaj automobil");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,38 +99,27 @@ public class FormaRezervacija extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSacuvaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelNova, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
                     .addComponent(panelPostojeca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(radioPostojeci)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioNovi)
-                        .addGap(0, 164, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dcDatumOd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbAutomobil, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dcDatumDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(dcDatumDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnDodaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioPostojeci)
-                    .addComponent(radioNovi))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelPostojeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelNova, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(dcDatumOd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -194,7 +131,11 @@ public class FormaRezervacija extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbAutomobil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -204,39 +145,23 @@ public class FormaRezervacija extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnSacuvaj;
     private javax.swing.JComboBox cbAutomobil;
-    private javax.swing.JComboBox cbMesto;
     private javax.swing.JComboBox cbMusterija;
     private com.toedter.calendar.JDateChooser dcDatumDo;
     private com.toedter.calendar.JDateChooser dcDatumOd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel panelNova;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelPostojeca;
     private javax.swing.ButtonGroup radioGrupa;
-    private javax.swing.JRadioButton radioNovi;
-    private javax.swing.JRadioButton radioPostojeci;
-    private javax.swing.JTextField txtAdresa;
-    private javax.swing.JTextField txtIme;
-    private javax.swing.JTextField txtPrezime;
+    private javax.swing.JTable tabelaAutomobili;
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JButton getBtnSacuvaj() {
         return btnSacuvaj;
-    }
-
-    public javax.swing.JComboBox getCbAutomobil() {
-        return cbAutomobil;
-    }
-
-    public javax.swing.JComboBox getCbMesto() {
-        return cbMesto;
     }
 
     public com.toedter.calendar.JDateChooser getDcDatumDo() {
@@ -247,10 +172,6 @@ public class FormaRezervacija extends javax.swing.JDialog {
         return dcDatumOd;
     }
 
-    public javax.swing.JPanel getPanelNova() {
-        return panelNova;
-    }
-
     public javax.swing.JPanel getPanelPostojeca() {
         return panelPostojeca;
     }
@@ -259,40 +180,28 @@ public class FormaRezervacija extends javax.swing.JDialog {
         return radioGrupa;
     }
 
-    public javax.swing.JRadioButton getRadioNovi() {
-        return radioNovi;
+    public JComboBox getCbAutomobil() {
+        return cbAutomobil;
     }
 
-    public javax.swing.JRadioButton getRadioPostojeci() {
-        return radioPostojeci;
-    }
-
-    public javax.swing.JTextField getTxtAdresa() {
-        return txtAdresa;
-    }
-
-    public javax.swing.JTextField getTxtIme() {
-        return txtIme;
-    }
-
-    public javax.swing.JTextField getTxtPrezime() {
-        return txtPrezime;
-    }
-    
-    public void addRadioNoviActionListener(ActionListener actionListener){
-        radioNovi.addActionListener(actionListener);
-    }
-    
-    public void addRadioPostojeciActionListener(ActionListener actionListener){
-        radioPostojeci.addActionListener(actionListener);
-    }
-
-    public void addBtnSacuvajActionListener(ActionListener actionListener){
+    public void addBtnSacuvajActionListener(ActionListener actionListener) {
         btnSacuvaj.addActionListener(actionListener);
-    }  
+    }
+
+    public void addBtnDodajActionListener(ActionListener actionListener) {
+        btnDodaj.addActionListener(actionListener);
+    }
 
     public javax.swing.JComboBox getCbMusterija() {
         return cbMusterija;
+    }
+
+    public javax.swing.JTable getTabelaAutomobili() {
+        return tabelaAutomobili;
+    }
+
+    public void setTabelaAutomobili(javax.swing.JTable tabelaAutomobili) {
+        this.tabelaAutomobili = tabelaAutomobili;
     }
 
 }

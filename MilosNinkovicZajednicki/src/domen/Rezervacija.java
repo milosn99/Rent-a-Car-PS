@@ -18,27 +18,34 @@ import java.util.List;
  */
 public class Rezervacija implements ApstraktniDomenskiObjekat {
 
+    private Long rezervacijaId;
     private Date datumDo;
     private Date datumOd;
     private Musterija musterija;
-    private Automobil automobil;
+    private Korisnik korisnik;
+    private List<StavkaRezervacije> automobili;
 
     public Rezervacija() {
+        automobili = new ArrayList<>();
+
     }
 
-    public Rezervacija(Date datumDo, Date datumOd, Musterija musterija, Automobil automobil) {
+    public Rezervacija(Long rezervacijaId, Date datumDo, Date datumOd, Musterija musterija, Korisnik korisnik) {
+        this.rezervacijaId = rezervacijaId;
         this.datumDo = datumDo;
         this.datumOd = datumOd;
         this.musterija = musterija;
-        this.automobil = automobil;
+        this.korisnik = korisnik;
+        automobili = new ArrayList<>();
     }
 
-    public Automobil getAutomobil() {
-        return automobil;
-    }
+    public Rezervacija(Date datumDo, Date datumOd, Musterija musterija, Korisnik korisnik) {
+        this.datumDo = datumDo;
+        this.datumOd = datumOd;
+        this.musterija = musterija;
+        this.korisnik = korisnik;
+        automobili = new ArrayList<>();
 
-    public void setAutomobil(Automobil automobil) {
-        this.automobil = automobil;
     }
 
     public Musterija getMusterija() {
@@ -74,27 +81,6 @@ public class Rezervacija implements ApstraktniDomenskiObjekat {
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
         List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
         while (rs.next()) {
-            String registracija = rs.getString("rezervacija.registracija");
-            Long modelid = rs.getLong("automobil.modelid");
-
-            Long markaid = rs.getLong("model.markaid");
-            String markaNaziv = rs.getString("marka.naziv");
-            Marka marka = new Marka(markaid, markaNaziv);
-
-            String oznaka = rs.getString("model.oznaka");
-            String segment = rs.getString("model.segment");
-
-            Model model = new Model(modelid, oznaka, segment, marka);
-
-            int kubikaza = rs.getInt("automobil.kubikaza");
-            int jacinaMotora = rs.getInt("automobil.jacinamotora");
-            int godiste = rs.getInt("automobil.godiste");
-            String gorivo = rs.getString("automobil.gorivo");
-            int kilometraza = rs.getInt("automobil.kilometraza");
-            BigDecimal potrosnja = rs.getBigDecimal("automobil.potrosnja");
-            int cena = rs.getInt("automobil.cena");
-
-            Automobil automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model);
 
             Long mestoid = rs.getLong("musterija.mestoid");
             String naziv = rs.getString("mesto.naziv");
@@ -104,12 +90,18 @@ public class Rezervacija implements ApstraktniDomenskiObjekat {
             String ime = rs.getString("musterija.ime");
             String prezime = rs.getString("musterija.prezime");
             String adresa = rs.getString("musterija.adresa");
-            Musterija musterija = new Musterija(musterijaId, ime, prezime, adresa, mesto);
+
+            String korisnickoIme = rs.getString("rezervacija.korisnik");
+            Korisnik korisnik = new Korisnik();
+            korisnik.setKorisnickoIme(korisnickoIme);
+            Musterija musterija = new Musterija(musterijaId, ime, prezime, adresa, mesto, korisnik);
 
             Date datumOd = rs.getDate("rezervacija.datumod");
             Date datumDo = rs.getDate("rezervacija.datumdo");
 
-            Rezervacija rezervacija = new Rezervacija(datumDo, datumOd, musterija, automobil);
+            Long rezervacijaId = rs.getLong("rezervacija.rezervacijaid");
+
+            Rezervacija rezervacija = new Rezervacija(rezervacijaId, datumDo, datumOd, musterija, korisnik);
 
             lista.add(rezervacija);
         }
@@ -118,45 +110,23 @@ public class Rezervacija implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        return "registracija,musterijaid,datumod,datumdo";
+        return "musterijaid,datumod,datumdo,korisnik";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        return "'" + automobil.getRegistracija() + "'," + musterija.getMusterijaId() + ",'" + new java.sql.Date(datumOd.getTime()) + "','" + new java.sql.Date(datumDo.getTime()) + "'";
+        return musterija.getMusterijaId() + ",'" + new java.sql.Date(datumOd.getTime()) + "','" + new java.sql.Date(datumDo.getTime()) + "','" + korisnik.getKorisnickoIme() + "'";
     }
 
     @Override
     public String vratiPrimarniKljuc() {
-        return "rezervacija.datumod= '" + new java.sql.Date(datumOd.getTime()) + "' and rezervacija.registracija='" + automobil.getRegistracija()+"'";
+        return "rezervacija.datumod= '" + new java.sql.Date(datumOd.getTime()) + "'";
     }
 
     @Override
     public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
         ApstraktniDomenskiObjekat rezervacija = null;
         while (rs.next()) {
-            String registracija = rs.getString("rezervacija.registracija");
-            Long modelid = rs.getLong("automobil.modelid");
-
-            Long markaid = rs.getLong("model.markaid");
-            String markaNaziv = rs.getString("marka.naziv");
-            Marka marka = new Marka(markaid, markaNaziv);
-
-            String oznaka = rs.getString("model.oznaka");
-            String segment = rs.getString("model.segment");
-
-            Model model = new Model(modelid, oznaka, segment, marka);
-
-            int kubikaza = rs.getInt("automobil.kubikaza");
-            int jacinaMotora = rs.getInt("automobil.jacinamotora");
-            int godiste = rs.getInt("automobil.godiste");
-            String gorivo = rs.getString("automobil.gorivo");
-            int kilometraza = rs.getInt("automobil.kilometraza");
-            BigDecimal potrosnja = rs.getBigDecimal("automobil.potrosnja");
-            int cena = rs.getInt("automobil.cena");
-
-            Automobil automobil = new Automobil(registracija, godiste, cena, kilometraza, potrosnja, gorivo, kubikaza, jacinaMotora, model);
-
             Long mestoid = rs.getLong("musterija.mestoid");
             String naziv = rs.getString("mesto.naziv");
             Mesto mesto = new Mesto(mestoid, naziv);
@@ -165,12 +135,18 @@ public class Rezervacija implements ApstraktniDomenskiObjekat {
             String ime = rs.getString("musterija.ime");
             String prezime = rs.getString("musterija.prezime");
             String adresa = rs.getString("musterija.adresa");
-            Musterija musterija = new Musterija(musterijaId, ime, prezime, adresa, mesto);
+            Musterija musterija = new Musterija(musterijaId, ime, prezime, adresa, mesto, null);
 
             Date datumOd = rs.getDate("rezervacija.datumod");
             Date datumDo = rs.getDate("rezervacija.datumdo");
 
-            rezervacija = new Rezervacija(datumDo, datumOd, musterija, automobil);
+            String korisnickoIme = rs.getString("rezervacija.korisnik");
+            Korisnik korisnik = new Korisnik();
+            korisnik.setKorisnickoIme(korisnickoIme);
+
+            Long rezervacijaId = rs.getLong("rezervacija.rezervacijaid");
+
+            rezervacija = new Rezervacija(rezervacijaId, datumDo, datumOd, musterija, korisnik);
 
         }
         return rezervacija;
@@ -179,6 +155,30 @@ public class Rezervacija implements ApstraktniDomenskiObjekat {
     @Override
     public String vratiVrednostiZaIzmenu() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Long getRezervacijaId() {
+        return rezervacijaId;
+    }
+
+    public void setRezervacijaId(Long rezervacijaId) {
+        this.rezervacijaId = rezervacijaId;
+    }
+
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
+    }
+
+    public List<StavkaRezervacije> getAutomobili() {
+        return automobili;
+    }
+
+    public void setAutomobili(List<StavkaRezervacije> automobili) {
+        this.automobili = automobili;
     }
 
 }

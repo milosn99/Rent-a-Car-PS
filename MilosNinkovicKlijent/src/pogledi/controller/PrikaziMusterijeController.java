@@ -23,14 +23,14 @@ import pogledi.forme.kompoente.MusterijeModelTabele;
  * @author milos
  */
 public class PrikaziMusterijeController {
-
+    
     private final FormaPrikaziMusterije frmPM;
-
+    
     public PrikaziMusterijeController(FormaPrikaziMusterije frmPM) {
         this.frmPM = frmPM;
         addActionListener();
     }
-
+    
     public void otvoriFormu() {
         try {
             pripremiFormu();
@@ -39,7 +39,7 @@ public class PrikaziMusterijeController {
             JOptionPane.showMessageDialog(frmPM, "Greska prilikom ucitavanja. Molimo Vas da probate ponovo", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
     private void addActionListener() {
         frmPM.addBtnPretraziActionListener(new ActionListener() {
             @Override
@@ -49,12 +49,18 @@ public class PrikaziMusterijeController {
                     String ime = frmPM.getTxtIme().getText();
                     String prezime = frmPM.getTxtPrezime().getText();
                     Mesto mesto = (Mesto) frmPM.getCbMesto().getSelectedItem();
+                    
                     uslov += "musterija.mestoid=" + mesto.getMestoId();
                     if (!ime.equals("")) {
                         uslov += " AND musterija.ime= '" + ime + "'";
                     }
                     if (!prezime.equals("")) {
                         uslov += " AND musterija.prezime= '" + prezime + "'";
+                    }
+                    if(!frmPM.getCheckMesto().isSelected()){
+                        
+                        String rep = uslov.contains("AND")? "musterija.mestoid=" + mesto.getMestoId()+" AND":"musterija.mestoid=" + mesto.getMestoId()+"";
+                        uslov = uslov.replaceAll(rep, "");
                     }
                     List<Musterija> musterije = Komunikacija.getInstanca().vratiMusterijePoUslovu(uslov);
                     JOptionPane.showMessageDialog(frmPM, "Sistem je nasao musterije po zadatom kriterijumu", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
@@ -65,7 +71,7 @@ public class PrikaziMusterijeController {
                 }
             }
         });
-
+        
         frmPM.addBtnIzmeniActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,15 +85,28 @@ public class PrikaziMusterijeController {
                 }
             }
         });
+        
+        frmPM.addCheckMestoActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (frmPM.getCheckMesto().isSelected()) {
+                    frmPM.getCbMesto().setEnabled(true);
+                } else {
+                    frmPM.getCbMesto().setEnabled(false);
+                }
+            }
+        });
     }
-
+    
     private void pripremiFormu() throws Exception {
         List<Musterija> musterije = Komunikacija.getInstanca().ucitajMusterije();
         MusterijeModelTabele mmt = new MusterijeModelTabele(musterije);
         frmPM.getTabelaMusterije().setModel(mmt);
+        frmPM.getCheckMesto().setSelected(false);
+        frmPM.getCbMesto().setEnabled(false);
         popuniCbMesto();
     }
-
+    
     private void popuniCbMesto() throws Exception {
         frmPM.getCbMesto().removeAllItems();
         List<Mesto> mesta = Komunikacija.getInstanca().ucitajMesta();
@@ -95,10 +114,10 @@ public class PrikaziMusterijeController {
             frmPM.getCbMesto().addItem(mesto);
         }
     }
-
+    
     public void izmenaPodataka() {
         MusterijeModelTabele mmt = (MusterijeModelTabele) frmPM.getTabelaMusterije().getModel();
         mmt.izmeniElement((int) Coordinator.getInstanca().vratiParam("PozicijaMusterije"), (Musterija) Coordinator.getInstanca().vratiParam("Musterija"));
     }
-
+    
 }

@@ -8,6 +8,7 @@ package pogledi.controller;
 import domen.Mesto;
 import domen.Musterija;
 import domen.Rezervacija;
+import domen.StavkaRezervacije;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -80,12 +81,9 @@ public class PrikaziRezervacijeController {
                     Coordinator.getInstanca().dodajParam("PozicijaRezervacije", rmt.getRezervacije().indexOf(r));
                     Coordinator.getInstanca().dodajParam("Rezervacija", r);
                     try {
-                        int siguran = JOptionPane.showConfirmDialog(frmPR, "Da li ste sigurni da zelite da obrisete rezervaciju?");
-                        if (siguran > 0) {
-                            Komunikacija.getInstanca().obrisiRezervaciju(r);
-                            izmenaPodataka();
-                            JOptionPane.showConfirmDialog(frmPR, "Sistem je uspesno obrisao rezervaciju", "Greska", JOptionPane.INFORMATION_MESSAGE);
-                        }
+                        Komunikacija.getInstanca().obrisiRezervaciju(r);
+                        izmenaPodataka();
+                        JOptionPane.showMessageDialog(frmPR, "Sistem je uspesno obrisao rezervaciju", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frmPR, "Sistem nije uspeo da obriše rezervaciju", "Greska", JOptionPane.ERROR_MESSAGE);
                     }
@@ -96,6 +94,14 @@ public class PrikaziRezervacijeController {
 
     private void pripremiFormu() throws Exception {
         List<Rezervacija> rezervacije = Komunikacija.getInstanca().ucitajRezervacije();
+        List<StavkaRezervacije> stavke = Komunikacija.getInstanca().ucitajStavke();
+        for (Rezervacija rezervacija : rezervacije) {
+            for (StavkaRezervacije stavkaRezervacije : stavke) {
+                if(stavkaRezervacije.getRezervacija().getRezervacijaId().equals(rezervacija.getRezervacijaId())){
+                    rezervacija.getAutomobili().add(stavkaRezervacije);
+                }
+            }
+        }
         RezervacijeModelTabele rmt = new RezervacijeModelTabele(rezervacije);
         frmPR.getTabelaRezervacije().setModel(rmt);
     }

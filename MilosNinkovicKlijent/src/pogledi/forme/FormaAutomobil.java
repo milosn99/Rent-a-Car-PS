@@ -202,7 +202,7 @@ public class FormaAutomobil extends javax.swing.JDialog {
 
         jLabel9.setText("Potrosnja:");
 
-        cbGorivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dizel", "Benzin", "Hibrid", "Elektricni" }));
+        cbGorivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dizel", "Benzin", "Hibrid" }));
 
         jLabel10.setText("Kubikaza:");
 

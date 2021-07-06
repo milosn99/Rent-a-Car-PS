@@ -64,22 +64,28 @@ public class PrikaziAutomobileController {
                         uslov += " AND automobil.registracija='" + registracija + "'";
                     }
                     if (cenaOd != null && !cenaOd.equals("")) {
-                        uslov += " AND automobil.cena>" + Integer.parseInt(cenaOd);
+                        uslov += " AND automobil.cena>=" + Integer.parseInt(cenaOd);
                     }
                     if (cenaDo != null && !cenaDo.equals("")) {
-                        uslov += " AND automobil.cena<" + Integer.parseInt(cenaDo);
+                        uslov += " AND automobil.cena<=" + Integer.parseInt(cenaDo);
                     }
                     if (kilometrazaOd != null && !kilometrazaOd.equals("")) {
-                        uslov += " AND automobil.kilometraza>" + Integer.parseInt(kilometrazaOd);
+                        uslov += " AND automobil.kilometraza>=" + Integer.parseInt(kilometrazaOd);
                     }
                     if (kilometrazaDo != null && !kilometrazaDo.equals("")) {
-                        uslov += " AND automobil.kilometraza<" + Integer.parseInt(kilometrazaDo);
+                        uslov += " AND automobil.kilometraza<=" + Integer.parseInt(kilometrazaDo);
                     }
                     if (godisteOd != null && !godisteOd.equals("")) {
-                        uslov += " AND automobil.godiste>" + Integer.parseInt(godisteOd);
+                        uslov += " AND automobil.godiste>=" + Integer.parseInt(godisteOd);
                     }
                     if (godisteDo != null && !godisteDo.equals("")) {
-                        uslov += " AND automobil.godiste<" + Integer.parseInt(godisteDo);
+                        uslov += " AND automobil.godiste<=" + Integer.parseInt(godisteDo);
+                    }
+                    if (!frmPA.getCheckModel().isSelected()) {
+
+                        String rep = uslov.contains("AND") ? "automobil.modelid=" + model.getModelId() + " AND" : "automobil.modelid=" + model.getModelId() + "";
+                        System.out.println(rep);
+                        uslov = uslov.replaceAll(rep, "");
                     }
                     List<Automobil> automobili = Komunikacija.getInstanca().vratiAutomobilePoUslovu(uslov);
                     JOptionPane.showMessageDialog(frmPA, "Sistem je uspeo da nađe automobile po zadatim kriterijumima", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
@@ -105,17 +111,29 @@ public class PrikaziAutomobileController {
                 }
             }
         });
+
+        frmPA.addCheckModelActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (frmPA.getCheckModel().isSelected()) {
+                    frmPA.getCbModel().setEnabled(true);
+                } else {
+                    frmPA.getCbModel().setEnabled(false);
+                }
+            }
+        });
     }
 
     private void pripremiFormu() throws Exception {
         List<Automobil> automobili = Komunikacija.getInstanca().ucitajAutomobile();
         AutomobilModelTabele amt = new AutomobilModelTabele(automobili);
         frmPA.getTabelaAutomobili().setModel(amt);
+        frmPA.getCbModel().setEnabled(false);
         popuniCbModel();
     }
 
     public void izmenaPodataka() {
-        AutomobilModelTabele amt =(AutomobilModelTabele) frmPA.getTabelaAutomobili().getModel();
+        AutomobilModelTabele amt = (AutomobilModelTabele) frmPA.getTabelaAutomobili().getModel();
         amt.izmeniElement((int) Coordinator.getInstanca().vratiParam("PozicijaAutomobila"), (Automobil) Coordinator.getInstanca().vratiParam("Automobil"));
     }
 
