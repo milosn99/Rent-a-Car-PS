@@ -44,6 +44,7 @@ public class FormaRezervacija extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaAutomobili = new javax.swing.JTable();
         btnDodaj = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -91,6 +92,9 @@ public class FormaRezervacija extends javax.swing.JDialog {
         btnDodaj.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnDodaj.setText("Dodaj automobil");
 
+        btnObrisi.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnObrisi.setText("Ukloni iz liste");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,7 +115,11 @@ public class FormaRezervacija extends javax.swing.JDialog {
                             .addComponent(dcDatumOd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbAutomobil, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(dcDatumDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(btnDodaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -132,7 +140,9 @@ public class FormaRezervacija extends javax.swing.JDialog {
                     .addComponent(cbAutomobil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -146,6 +156,7 @@ public class FormaRezervacija extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnSacuvaj;
     private javax.swing.JComboBox cbAutomobil;
     private javax.swing.JComboBox cbMusterija;
@@ -192,6 +203,10 @@ public class FormaRezervacija extends javax.swing.JDialog {
         btnDodaj.addActionListener(actionListener);
     }
 
+    public void addBtnObrisiActionListener(ActionListener actionListener) {
+        btnObrisi.addActionListener(actionListener);
+    }
+
     public javax.swing.JComboBox getCbMusterija() {
         return cbMusterija;
     }
@@ -202,6 +217,14 @@ public class FormaRezervacija extends javax.swing.JDialog {
 
     public void setTabelaAutomobili(javax.swing.JTable tabelaAutomobili) {
         this.tabelaAutomobili = tabelaAutomobili;
+    }
+
+    public javax.swing.JButton getBtnDodaj() {
+        return btnDodaj;
+    }
+
+    public javax.swing.JButton getBtnObrisi() {
+        return btnObrisi;
     }
 
 }

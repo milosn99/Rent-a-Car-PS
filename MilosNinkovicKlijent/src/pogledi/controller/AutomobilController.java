@@ -12,6 +12,8 @@ import domen.Model;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -121,6 +123,9 @@ public class AutomobilController {
                 }
                 String registracija = frmAutomobil.getTxtRegistracija().getText().trim();
                 int godiste = Integer.parseInt(frmAutomobil.getTxtGodiste().getText().trim());
+                if (godiste > Calendar.getInstance().get(Calendar.YEAR)) {
+                    throw new Exception("Pogresna godina");
+                }
                 int kilometraza = Integer.parseInt(frmAutomobil.getTxtKilometraza().getText().trim());
                 BigDecimal potrosnja = new BigDecimal(frmAutomobil.getTxtPotrosnja().getText().trim());
                 int cena = Integer.parseInt(frmAutomobil.getTxtCena().getText().trim());
@@ -245,6 +250,7 @@ public class AutomobilController {
                 frmAutomobil.getTxtJacinaMotora().setEnabled(false);
                 frmAutomobil.getCbGorivo().setEnabled(false);
                 frmAutomobil.getTxtRegistracija().setEnabled(false);
+                frmAutomobil.getCbModel().setEnabled(false);
 
                 Automobil automobil = (Automobil) Coordinator.getInstanca().vratiParam("Automobil");
 

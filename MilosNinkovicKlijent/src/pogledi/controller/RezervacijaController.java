@@ -30,16 +30,16 @@ import pogledi.forme.kompoente.AutomobilModelTabele;
  * @author milos
  */
 public class RezervacijaController {
-
+    
     private final FormaRezervacija frmRezervacija;
-
+    
     public RezervacijaController(FormaRezervacija frmRezervacija) {
         this.frmRezervacija = frmRezervacija;
         addActionListeners();
     }
-
+    
     private void addActionListeners() {
-
+        
         frmRezervacija.addBtnSacuvajActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,24 +50,24 @@ public class RezervacijaController {
                     JOptionPane.showMessageDialog(frmRezervacija, "Sistem je uspesno zapamtio rezervaciju", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     frmRezervacija.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(frmRezervacija, "Sistem nije uspesno zapamtio rezervaciju", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frmRezervacija, "Sistem nije uspesno zapamtio rezervaciju. " + ex.getMessage() , "Greska", JOptionPane.ERROR_MESSAGE);
                 }
-
+                
             }
-
+            
             private Rezervacija validacija() throws Exception {
-
+                
                 Musterija musterija = (Musterija) frmRezervacija.getCbMusterija().getSelectedItem();
                 Date datumOd = frmRezervacija.getDcDatumOd().getDate();
                 Date datumDo = frmRezervacija.getDcDatumDo().getDate();
-
+                
                 if (musterija == null || datumDo == null || datumOd
                         == null || datumOd.before(new Date()) || datumDo.before(datumOd)) {
                     throw new Exception("Losi podaci za rezervaciju");
                 }
-
+                
                 Rezervacija rezervacija = new Rezervacija(datumDo, datumOd, musterija, (Korisnik) Coordinator.getInstanca().vratiParam("korisnik"));
-
+                
                 AutomobilModelTabele amt = (AutomobilModelTabele) frmRezervacija.getTabelaAutomobili().getModel();
                 List<StavkaRezervacije> stavke = new ArrayList<>();
                 for (Automobil automobil : amt.getAutomobili()) {
@@ -79,10 +79,10 @@ public class RezervacijaController {
                 rezervacija.setAutomobili(stavke);
                 return rezervacija;
             }
-
+            
         }
         );
-
+        
         frmRezervacija.addBtnDodajActionListener(
                 new ActionListener() {
             @Override
@@ -97,8 +97,17 @@ public class RezervacijaController {
                 frmRezervacija.getTabelaAutomobili().setModel(amt);
             }
         });
+        
+        frmRezervacija.addBtnObrisiActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AutomobilModelTabele amt = (AutomobilModelTabele) frmRezervacija.getTabelaAutomobili().getModel();
+                amt.obrisiAutomobil(frmRezervacija.getTabelaAutomobili().getSelectedRow());
+                frmRezervacija.getTabelaAutomobili().setModel(amt);
+            }
+        });
     }
-
+    
     public void otvoriFormu() {
         try {
             pripremiFormu();
@@ -107,22 +116,22 @@ public class RezervacijaController {
 //            Logger.getLogger(RezervacijaController.class
 //                    .getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(frmRezervacija, "Sistem ne moze da otvori formu", "Greska", JOptionPane.ERROR_MESSAGE);
-
+            
         }
     }
-
+    
     private void pripremiFormu() throws Exception {
         popuniCbMusterija();
         popuniCbAutomobil();
         srediPolja();
     }
-
+    
     private void srediPolja() {
         frmRezervacija.getCbMusterija().setEnabled(true);
         AutomobilModelTabele amt = new AutomobilModelTabele(null);
         frmRezervacija.getTabelaAutomobili().setModel(amt);
     }
-
+    
     private void popuniCbAutomobil() throws Exception {
         frmRezervacija.getCbAutomobil().removeAllItems();
         List<Automobil> automobili = Komunikacija.getInstanca().ucitajAutomobile();
@@ -130,7 +139,7 @@ public class RezervacijaController {
             frmRezervacija.getCbAutomobil().addItem(automobil);
         }
     }
-
+    
     private void popuniCbMusterija() throws Exception {
         frmRezervacija.getCbMusterija().removeAllItems();
         List<Musterija> musterije = Komunikacija.getInstanca().ucitajMusterije();
@@ -138,5 +147,5 @@ public class RezervacijaController {
             frmRezervacija.getCbMusterija().addItem(musterija);
         }
     }
-
+    
 }

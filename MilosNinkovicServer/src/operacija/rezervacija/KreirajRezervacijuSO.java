@@ -49,7 +49,7 @@ public class KreirajRezervacijuSO extends ApstraktnaGenerickaOperacija {
         for (StavkaRezervacije stavka : stavke) {
             for (StavkaRezervacije stavkaRezervacije : r.getAutomobili()) {
                 if (stavka.getAutomobil().equals(stavkaRezervacije.getAutomobil())) {
-                    throw new Exception("Zauzet auto");
+                    throw new Exception("Neki od trazenih automobila je zauzet u tom periodu");
                 }
             }
         }

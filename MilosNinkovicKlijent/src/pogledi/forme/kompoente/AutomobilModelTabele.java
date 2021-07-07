@@ -86,4 +86,11 @@ public class AutomobilModelTabele extends AbstractTableModel {
         automobili.add(automobil);
         fireTableDataChanged();
     }
+
+    public void obrisiAutomobil(int i) {
+        if(i>=0){
+            automobili.remove(i);
+        }
+        fireTableRowsDeleted(i, i);
+    }
 }
